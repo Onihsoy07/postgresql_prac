@@ -4,11 +4,9 @@ import com.test.postgresql_test.Service.NaverCFRService;
 import com.test.postgresql_test.domain.dto.CFRResponseDto;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
@@ -49,16 +47,17 @@ public class NaverCFRServiceImpl implements NaverCFRService {
 
     @Override
     public String getCFR(MultipartFile multipartFile) throws Exception {
-        String boundary = "--" + convertBinary(multipartFile); //위 보고 boundary 추가
-        System.out.println(boundary);
         RestTemplate rt = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Content-Type",  "multipart/form-data; boundary=" + boundary);
+        httpHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
         httpHeaders.add("X-Naver-Client-Id", X_Naver_Client_Id);
         httpHeaders.add("X-Naver-Client-Secret", X_Naver_Client_Secret);
 
-        HttpEntity<MultiValueMap<String, String>> CFRRequest =
-                new HttpEntity<>(null, httpHeaders);
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("image", multipartFile.getResource());
+
+        HttpEntity<MultiValueMap<String, Object>> CFRRequest =
+                new HttpEntity<>(body, httpHeaders);
 
         ResponseEntity<String> response = rt.exchange(
                 "https://openapi.naver.com/v1/vision/celebrity",
