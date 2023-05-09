@@ -1,5 +1,32 @@
 spring:
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/postgresql_test
-    username: test
-    password: 0880
+    url: ENC(7mBvgvEAvebVsVrK+ji79yd0T6+/oNTBwRY2Y2DqpvtTW24/7O6X4KOnQnKevSV3HtoYWY4Qq2yt4tRn7hEu5Q==)
+    #ENC(DZS8i8xbaTeVJ9CrB/Il0K2CbQxdRswHfl+8whMAFqYmmkYY5KKGikCAtr19rwiyibyc4pA0IQzru6GU6XRokA==)
+    #jdbc:postgresql://127.0.0.1:5432/postgresql_test
+    username: ENC(g9usJeHDF0u6Gfwyb2uMqQ==)
+    password: ENC(ozJxEfavs5sEteOUmP6nGw==)
+
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+#    property:
+#      prefix: ENC(
+#      suffix: )
+#    algorithm: PBEWithMD5ANdDES
+#    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+
+open_api:
+  naver:
+    X_Naver_Client_Id: ENC(9B97xVDdud3c+pssOR1cnaHWI3t8H8VqnENMvX3ogrQ=)
+    X_Naver_Client_Secret: ENC(aaKTEF/urPtJ/4NYLpHD0v3NHE4FiC6T)
