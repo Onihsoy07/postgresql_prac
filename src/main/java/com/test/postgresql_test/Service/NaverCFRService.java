@@ -5,8 +5,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface NaverCFRService {
 
-    String getCFR(MultipartFile multipartFile) throws Exception;
-
-    void getTest();
+    CFRResponseDto getCFR(MultipartFile multipartFile) throws Exception;
 
 }

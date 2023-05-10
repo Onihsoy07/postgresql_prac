@@ -16,14 +16,8 @@ public class NaverCFRApiController {
     private final NaverCFRService naverCFRService;
 
     @PostMapping("/test/cfr")
-    public ResponseEntity<String> getCRF(@RequestParam("image") MultipartFile multipartFile) throws Exception {
+    public ResponseEntity<CFRResponseDto> getCRF(@RequestParam("image") MultipartFile multipartFile) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(naverCFRService.getCFR(multipartFile));
-    }
-
-    @PostMapping("/test")
-    public ResponseEntity<?> test() {
-        naverCFRService.getTest();
-        return ResponseEntity.status(HttpStatus.OK).body(1353551);
     }
 
     @GetMapping({"/",""})
