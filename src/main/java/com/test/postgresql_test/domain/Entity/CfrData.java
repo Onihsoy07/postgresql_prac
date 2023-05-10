@@ -6,31 +6,37 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Builder
 @Table(schema = "postgresql_test")
-public class Users {
+public class CfrData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String username;
+    @Column(nullable = false, unique = false)
+    private String value;
 
     @Column(nullable = false, unique = false)
-    private String password;
+    private Float confidence;
 
-    @Column(nullable = true, unique = false)
-    private String email;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Users users;
 
-    @OneToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<CfrData> cfrDataList;
-
+    //{"info":
+//  {
+//      "size":{"width":120,"height":160},
+//      "faceCount":1
+//  },
+//"faces":
+// [{
+//  "celebrity":{"value":"전진우","confidence":1.0}
+//  }]
+//}
 }

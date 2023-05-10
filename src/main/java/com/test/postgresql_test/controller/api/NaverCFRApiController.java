@@ -1,9 +1,8 @@
 package com.test.postgresql_test.controller.api;
 
 import com.test.postgresql_test.Service.NaverCFRService;
-import com.test.postgresql_test.domain.dto.CFRResponseDto;
+import com.test.postgresql_test.domain.dto.CfrResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,7 @@ public class NaverCFRApiController {
     private final NaverCFRService naverCFRService;
 
     @PostMapping("/test/cfr")
-    public ResponseEntity<CFRResponseDto> getCRF(@RequestParam("image") MultipartFile multipartFile) throws Exception {
+    public ResponseEntity<CfrResponseDto> getCRF(@RequestParam("image") MultipartFile multipartFile) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(naverCFRService.getCFR(multipartFile));
     }
 

@@ -3,7 +3,7 @@ package com.test.postgresql_test.Service.ServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.test.postgresql_test.Service.NaverCFRService;
-import com.test.postgresql_test.domain.dto.CFRResponseDto;
+import com.test.postgresql_test.domain.dto.CfrResponseDto;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -17,11 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
 
 @Service
 public class NaverCFRServiceImpl implements NaverCFRService {
@@ -48,7 +43,7 @@ public class NaverCFRServiceImpl implements NaverCFRService {
 //    --{boundary-text}--
 
     @Override
-    public CFRResponseDto getCFR(MultipartFile multipartFile) throws Exception {
+    public CfrResponseDto getCFR(MultipartFile multipartFile) throws Exception {
         RestTemplate rt = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
@@ -69,9 +64,9 @@ public class NaverCFRServiceImpl implements NaverCFRService {
         );
 
         ObjectMapper mapper = new ObjectMapper();
-        CFRResponseDto cfrResponseDto = null;
+        CfrResponseDto cfrResponseDto = null;
         try {
-            cfrResponseDto = mapper.readValue(response.getBody(), CFRResponseDto.class);
+            cfrResponseDto = mapper.readValue(response.getBody(), CfrResponseDto.class);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

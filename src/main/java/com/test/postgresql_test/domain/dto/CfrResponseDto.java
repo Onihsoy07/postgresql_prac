@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CFRResponseDto {
+public class CfrResponseDto {
 
     public Info info;
     public List<Face> faces;
