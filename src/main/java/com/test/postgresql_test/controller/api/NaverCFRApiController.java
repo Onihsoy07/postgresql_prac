@@ -1,4 +1,4 @@
-package com.test.postgresql_test.controller;
+package com.test.postgresql_test.controller.api;
 
 import com.test.postgresql_test.Service.NaverCFRService;
 import com.test.postgresql_test.domain.dto.CFRResponseDto;
@@ -20,9 +20,10 @@ public class NaverCFRApiController {
         return ResponseEntity.status(HttpStatus.OK).body(naverCFRService.getCFR(multipartFile));
     }
 
-    @GetMapping({"/",""})
-    public String tt() {
-        return "<h1>hello</h1>";
-    }
+//    @GetMapping("/test")
+//    public ResponseEntity<Integer> tt() {
+//        System.out.println("hello");
+//        return ResponseEntity.status(HttpStatus.OK).body(1234);
+//    }
 
 }
