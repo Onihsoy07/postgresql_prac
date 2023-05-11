@@ -27,6 +27,7 @@ public class CfrData {
     private Float confidence;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "users")
     private Users users;
 
     //{"info":

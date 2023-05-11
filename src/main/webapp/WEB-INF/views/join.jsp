@@ -42,10 +42,25 @@
 </nav>
 
 <div style="height:1000px;margin:15px;">
-    <form id="uploadForm" enctype="multipart/form-data">
-        <input type="file" id="imageInput" />
-        <button type="button" id="btn-cfrRequest">제출</button>
-    </form>
+    <div class="container">
+      <form>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="username" class="form-control" placeholder="Enter username" id="username" name="username">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" placeholder="Enter password" id="password" name="password">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" placeholder="Enter email" id="email" name="email">
+        </div>
+      </form>
+      <button id="btn-join" class="btn btn-primary">회원가입</button>
+    </div>
 </div>
 
 
@@ -54,7 +69,7 @@
   <p>Footer</p>
 </div>
 
-<script src="/js/cfr.js"></script>
+<script src="/js/user.js"></script>
 
 </body>
 </html>

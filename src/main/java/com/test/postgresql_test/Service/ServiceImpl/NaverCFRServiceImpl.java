@@ -3,11 +3,15 @@ package com.test.postgresql_test.Service.ServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.test.postgresql_test.Service.NaverCFRService;
+import com.test.postgresql_test.domain.Entity.CfrData;
 import com.test.postgresql_test.domain.dto.CfrResponseDto;
+import com.test.postgresql_test.domain.repository.CfrDataRepository;
+import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
@@ -19,7 +23,10 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 
 @Service
+@RequiredArgsConstructor
 public class NaverCFRServiceImpl implements NaverCFRService {
+
+    private final CfrDataRepository cfrDataRepository;
 
     @Value("${open_api.naver.X_Naver_Client_Id}")
     private String X_Naver_Client_Id;
@@ -72,6 +79,15 @@ public class NaverCFRServiceImpl implements NaverCFRService {
         }
 
         return cfrResponseDto;
+    }
+
+    @Override
+    public void save(CfrResponseDto cfrResponseDto) {
+        CfrData cfrData = new CfrData().builder()
+                .value(cfrResponseDto.getFaces().get(0).getCelebrity().getValue())
+                .confidence(cfrResponseDto.getFaces().get(0).getCelebrity().getConfidence())
+                .build();
+        cfrDataRepository.save(cfrData);
     }
 
     private String convertBinary(MultipartFile files) throws Exception{

@@ -7,11 +7,9 @@ function cfrRequest(){
     formData.append("image", imageInput.files[0]);
 
     if(imageInput.files.length === 0){
-        alert("파일은 선택해주세요");
+        alert("파일을 선택해주세요");
         return;
-      }
-
-    console.log(formData);
+    }
 
     $.ajax({
         url : '/test/cfr',
@@ -28,4 +26,3 @@ function cfrRequest(){
         console.log(error);
     });
 }
-
