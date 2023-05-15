@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.test.postgresql_test.Service.NaverCFRService;
 import com.test.postgresql_test.domain.Entity.CfrData;
+import com.test.postgresql_test.domain.Entity.Users;
 import com.test.postgresql_test.domain.dto.CfrResponseDto;
 import com.test.postgresql_test.domain.repository.CfrDataRepository;
 import lombok.RequiredArgsConstructor;
@@ -82,10 +83,12 @@ public class NaverCFRServiceImpl implements NaverCFRService {
     }
 
     @Override
-    public void save(CfrResponseDto cfrResponseDto) {
+    @Transactional
+    public void save(CfrResponseDto cfrResponseDto, Users users) {
         CfrData cfrData = new CfrData().builder()
                 .value(cfrResponseDto.getFaces().get(0).getCelebrity().getValue())
                 .confidence(cfrResponseDto.getFaces().get(0).getCelebrity().getConfidence())
+                .users(users)
                 .build();
         cfrDataRepository.save(cfrData);
     }

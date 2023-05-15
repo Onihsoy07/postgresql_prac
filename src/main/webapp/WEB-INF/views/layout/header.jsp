@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+<sec:authorize access="isAuthenticated()">
+  <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,40 +36,24 @@
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/auth/login">로그인</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/auth/join">회원가입</a>
-      </li>
+        <c:choose>
+            <c:when test="${empty principal}">
+              <li class="nav-item">
+                <a class="nav-link" href="/auth/login">로그인</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/auth/join">회원가입</a>
+              </li>
+            </c:when>
+            <c:otherwise>
+              <li class="nav-item">
+                <a class="nav-link" href="/auth/login">${principal.users.username}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">로그아웃</a>
+              </li>
+            </c:otherwise>
+        </c:choose>
     </ul>
   </div>
 </nav>
-
-<div style="height:1000px;margin:15px;">
-    <div class="container">
-      <form>
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="username" class="form-control" placeholder="Enter username" id="username" name="username">
-        </div>
-
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" placeholder="Enter password" id="password" name="password">
-        </div>
-      </form>
-      <button id="btn-login" class="btn btn-primary">로그인</button>
-    </div>
-</div>
-
-
-
-<div class="jumbotron text-center" style="margin-bottom:0">
-  <p>Footer</p>
-</div>
-
-<script src="/js/user.js"></script>
-
-</body>
-</html>

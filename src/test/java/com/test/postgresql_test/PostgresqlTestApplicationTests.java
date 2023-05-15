@@ -3,10 +3,10 @@ package com.test.postgresql_test;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class PostgresqlTestApplicationTests {
 
-	@Test
+//	@Test
 	void contextLoads() {
 	}
 

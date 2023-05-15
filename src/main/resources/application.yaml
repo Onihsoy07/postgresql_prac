@@ -1,15 +1,19 @@
 spring:
   datasource:
-    url: ENC(7mBvgvEAvebVsVrK+ji79yd0T6+/oNTBwRY2Y2DqpvtTW24/7O6X4KOnQnKevSV3HtoYWY4Qq2yt4tRn7hEu5Q==)
+    url: jdbc:mysql://localhost:3307/cfr
+    #AWS  ENC(45VIbitzGi6uRZqtppxHdtp54pm0mMo8WbDd30T0WNRzbymTesLe9Zu4kzVHL8IJ)
+    #ENC(5nwYfH1QeMNqNkT9tmtu/6Gbmi3L3VgekUUcb81t/DK4TOAp8idDng==)
     #ENC(DZS8i8xbaTeVJ9CrB/Il0K2CbQxdRswHfl+8whMAFqYmmkYY5KKGikCAtr19rwiyibyc4pA0IQzru6GU6XRokA==)
-    #jdbc:postgresql://127.0.0.1:5432/postgresql_test
-    username: ENC(g9usJeHDF0u6Gfwyb2uMqQ==)
+    #jdbc:mysql://127.0.0.1:3307/cfr
+    username: ENC(pVFh/sHs7RgvCGOlcSl3Fg==)
+    #root ENC(pVFh/sHs7RgvCGOlcSl3Fg==)
+    #test ENC(mrcBUlx9hUxwVNVNS8ErZA==)
     password: ENC(ozJxEfavs5sEteOUmP6nGw==)
 
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
 
   mvc:
@@ -19,12 +23,16 @@ spring:
 
 jasypt:
   encryptor:
+    password: 2d10fb44af7c
     bean: jasyptStringEncryptor
 #    property:
 #      prefix: ENC(
 #      suffix: )
 #    algorithm: PBEWithMD5ANdDES
 #    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+
+#server:
+#  port: 8080
 
 open_api:
   naver:

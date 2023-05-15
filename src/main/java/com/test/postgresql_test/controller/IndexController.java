@@ -13,12 +13,12 @@ public class IndexController {
 
     @GetMapping("/auth/login")
     public String login() {
-        return "login";
+        return "user/login";
     }
 
     @GetMapping("/auth/join")
     public String join() {
-        return "join";
+        return "user/join";
     }
 
 }
