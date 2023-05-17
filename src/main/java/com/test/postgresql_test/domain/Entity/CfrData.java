@@ -1,14 +1,14 @@
 package com.test.postgresql_test.domain.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -27,6 +27,7 @@ public class CfrData extends Base {
     private Float confidence;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
     private Users users;
 
     //{"info":

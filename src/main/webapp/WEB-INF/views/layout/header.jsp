@@ -47,6 +47,9 @@
             </c:when>
             <c:otherwise>
                 <li class="nav-item dropdown">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cfr">연예인 얼굴</a>
+                    </li>
                   <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                     ${principal.users.username}
                   </a>

@@ -20,9 +20,8 @@ function cfrRequest(){
         contentType: false //헤더의 Content-Type을 설정 : false 값을 해야 form data로 인식합니다
     }).done(function(data){
         alert("성공");
-        console.log(data);
+        location.reload();
     }).fail(function(error){
         alert("실패");
-        console.log(error);
     });
 }

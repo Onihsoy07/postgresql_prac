@@ -3,16 +3,12 @@
 <%@ include file="layout/header.jsp" %>
 
 <div class="container-fluid" style="height:1000px;margin:15px;">
-    <form id="uploadForm" enctype="multipart/form-data">
-        <input type="file" id="imageInput" />
-        <button type="button" id="btn-cfrRequest">제출</button>
-    </form>
 
     <div class="container mt-3">
       <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between align-items-center">
-          Inbox
-          <span class="badge badge-primary badge-pill">12</span>
+          <a href="/${principal.users.id}">${principal.users.id}</a>
+          <span class="badge badge-primary badge-pill">${principal.users.username}</span>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">
           Ads
@@ -34,8 +30,5 @@
     </ul>
 
 </div>
-
-
-<script src="/js/cfr.js"></script>
 
 <%@ include file="layout/footer.jsp" %>

@@ -32,4 +32,9 @@ public class IndexController {
         return "user/modify";
     }
 
+    @GetMapping("/cfr")
+    public String cfr() {
+        return "cfr/cfr";
+    }
+
 }

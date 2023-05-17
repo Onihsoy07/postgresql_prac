@@ -1,16 +1,16 @@
 package com.test.postgresql_test.domain.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Setter
+@Getter
 @Builder
 @Table(schema = "postgresql_test")
 public class Reply {
@@ -25,9 +25,11 @@ public class Reply {
     private Long level;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
     private Board board;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
     private Users users;
 
 }
