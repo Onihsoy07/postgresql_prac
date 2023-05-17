@@ -13,7 +13,7 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
 
   mvc:
@@ -23,7 +23,7 @@ spring:
 
 jasypt:
   encryptor:
-    password: 2d10fb44af7c
+#    password:
     bean: jasyptStringEncryptor
 #    property:
 #      prefix: ENC(

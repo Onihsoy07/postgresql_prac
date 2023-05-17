@@ -1,11 +1,13 @@
 package com.test.postgresql_test.domain.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -13,7 +15,7 @@ import java.util.List;
 @Data
 @Builder
 @Table(schema = "postgresql_test")
-public class Users {
+public class Users extends Base {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +35,13 @@ public class Users {
     private String email;
 
     @OneToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<CfrData> cfrDataList;
+    private Set<CfrData> cfrDataList;
+
+    @OneToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("users")
+    private Set<Board> boardList;
+
+//    @OneToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    private List<Reply> replyList;
 
 }

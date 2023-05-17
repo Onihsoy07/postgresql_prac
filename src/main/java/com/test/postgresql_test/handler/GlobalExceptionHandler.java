@@ -16,15 +16,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseDto<String> globalIllegalArgumentExceptionHandler(IllegalArgumentException e) {
-        LOGGER.warn(e.getMessage());
-        System.out.println("erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ ");
         return new ResponseDto<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseDto<String> globalExceptionHandler(Exception e) {
-        System.out.println("erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ erroe~ ");
-        LOGGER.warn(e.getMessage());
+       LOGGER.warn(e.getMessage());
         return new ResponseDto<>(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
 

@@ -8,35 +8,26 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Builder
 @Table(schema = "postgresql_test")
-public class CfrData extends Base {
+public class Reply {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, unique = true)
     private Long id;
 
-    @Column(nullable = false, unique = false)
-    private String value;
+    @Lob
+    private String comment;
 
-    @Column(nullable = false, unique = false)
-    private Float confidence;
+    private Long level;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Board board;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Users users;
 
-    //{"info":
-//  {
-//      "size":{"width":120,"height":160},
-//      "faceCount":1
-//  },
-//"faces":
-// [{
-//  "celebrity":{"value":"전진우","confidence":1.0}
-//  }]
-//}
 }

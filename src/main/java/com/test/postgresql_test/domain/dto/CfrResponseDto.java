@@ -3,7 +3,6 @@ package com.test.postgresql_test.domain.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.test.postgresql_test.domain.dto.CfrResponseDtoInner.*;
 
 import java.util.List;
 
@@ -14,6 +13,37 @@ public class CfrResponseDto {
 
     public Info info;
     public List<Face> faces;
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Info {
+        public Size size;
+        public Integer faceCount;
+
+        @Data
+        @NoArgsConstructor
+        @AllArgsConstructor
+        public static class Size {
+            public Integer width;
+            public Integer height;
+        }
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Face {
+        public Celebrity celebrity;
+
+        @Data
+        @NoArgsConstructor
+        @AllArgsConstructor
+        public static class Celebrity {
+            public String value;
+            public Float confidence;
+        }
+    }
 
 }
 

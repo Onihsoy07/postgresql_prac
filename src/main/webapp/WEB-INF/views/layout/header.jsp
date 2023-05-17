@@ -38,20 +38,23 @@
     <ul class="navbar-nav">
         <c:choose>
             <c:when test="${empty principal}">
-              <li class="nav-item">
-                <a class="nav-link" href="/auth/login">로그인</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/auth/join">회원가입</a>
-              </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/auth/login">로그인</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/auth/join">회원가입</a>
+                </li>
             </c:when>
             <c:otherwise>
-              <li class="nav-item">
-                <a class="nav-link" href="/auth/login">${principal.users.username}</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/logout">로그아웃</a>
-              </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    ${principal.users.username}
+                  </a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/user/detail">회원 정보</a>
+                    <a class="dropdown-item" href="/logout">로그아웃</a>
+                  </div>
+                </li>
             </c:otherwise>
         </c:choose>
     </ul>

@@ -21,4 +21,15 @@ public class IndexController {
         return "user/join";
     }
 
+
+    @GetMapping("/user/detail")
+    public String userDetail() {
+        return "user/detail";
+    }
+
+    @GetMapping("/user/modify")
+    public String userModify() {
+        return "user/modify";
+    }
+
 }
