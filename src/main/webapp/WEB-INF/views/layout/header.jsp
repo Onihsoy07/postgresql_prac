@@ -16,6 +16,10 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
   <style>
   .fakeimg {
     height: 200px;
@@ -50,11 +54,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/cfr">연예인 얼굴</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/board">글쓰기</a>
+                    </li>
                   <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                     ${principal.users.username}
                   </a>
                   <div class="dropdown-menu">
                     <a class="dropdown-item" href="/user/detail">회원 정보</a>
+                    <a class="dropdown-item" href="/cfr/${principal.users.id}">cfr 리스트</a>
                     <a class="dropdown-item" href="/logout">로그아웃</a>
                   </div>
                 </li>

@@ -1,6 +1,7 @@
 package com.test.postgresql_test.Service.ServiceImpl;
 
 import com.test.postgresql_test.Service.UsersService;
+import com.test.postgresql_test.domain.Entity.CfrData;
 import com.test.postgresql_test.domain.Entity.Role;
 import com.test.postgresql_test.domain.Entity.Users;
 import com.test.postgresql_test.domain.dto.UsersJoinDto;
@@ -9,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -28,5 +32,12 @@ public class UsersServiceImpl implements UsersService {
                 .role(Role.USER)
                 .build();
         usersRepository.save(users);
+    }
+
+    public Set<CfrData> findCfrAll(Long id) {
+        Users users = usersRepository.findById(id).orElseThrow(() -> {
+            throw new IllegalArgumentException("아이디를 찾을 수 없음");
+        });
+        return users.getCfrDataList();
     }
 }

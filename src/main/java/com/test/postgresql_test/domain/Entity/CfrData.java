@@ -3,6 +3,7 @@ package com.test.postgresql_test.domain.Entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
 
@@ -24,6 +25,7 @@ public class CfrData extends Base {
     private String value;
 
     @Column(nullable = false, unique = false)
+    @OrderBy("createDate")
     private Float confidence;
 
     @ManyToOne(fetch = FetchType.EAGER)

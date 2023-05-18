@@ -2,6 +2,8 @@ document.getElementById("btn-cfrRequest").addEventListener('click',cfrRequest);
 
 function cfrRequest(){
 
+    let id = $("#id").val();
+
     var imageInput = $("#imageInput")[0];
     var formData = new FormData();
     formData.append("image", imageInput.files[0]);
@@ -20,7 +22,7 @@ function cfrRequest(){
         contentType: false //헤더의 Content-Type을 설정 : false 값을 해야 form data로 인식합니다
     }).done(function(data){
         alert("성공");
-        location.reload();
+        location.href = `/cfr/${id}`;
     }).fail(function(error){
         alert("실패");
     });
