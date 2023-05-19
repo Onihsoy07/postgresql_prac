@@ -32,7 +32,7 @@ public class BoardService {
     }
 
     @Transactional(readOnly = true)
-    public Board boardFind(Long id) {
+    public Board findById(Long id) {
         return boardRepository.findById(id).orElseThrow(() -> {
             throw new IllegalArgumentException("보드 못찾음");
         });

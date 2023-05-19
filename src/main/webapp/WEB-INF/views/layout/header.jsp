@@ -25,6 +25,29 @@
     height: 200px;
     background: #aaa;
   }
+  aside {
+    width: 30%;
+    height: 800px;
+    padding-left: 0px;
+    padding-top: 10px;
+    margin: 15px 15px;
+    float: right;
+    font-style: italic;
+    background-color: grey;
+  }
+  .content {
+      background-color: white;
+      padding-top: 5px;
+      padding-left: 10px;
+      width: 67%;
+      float: left;
+  }
+  .main_wrap {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      margin: 29px auto 0 auto;
+  }
   </style>
 </head>
 <body>

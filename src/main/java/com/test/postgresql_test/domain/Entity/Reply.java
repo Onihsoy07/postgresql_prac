@@ -22,7 +22,7 @@ public class Reply {
     @Lob
     private String comment;
 
-    private Long level;
+    private int level;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonBackReference

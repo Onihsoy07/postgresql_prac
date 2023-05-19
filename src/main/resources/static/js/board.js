@@ -34,7 +34,7 @@ $(function() {
             }
         }).fail(function (error){
             console.log(error);
-            alert("글쓰기가 실패되었습니다11111.");
+            alert("글쓰기가 실패되었습니다.");
         });
     });
 

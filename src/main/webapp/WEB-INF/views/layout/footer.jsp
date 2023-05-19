@@ -4,7 +4,5 @@
   <p>Footer</p>
 </div>
 
-<script src="/js/user.js"></script>
-
 </body>
 </html>

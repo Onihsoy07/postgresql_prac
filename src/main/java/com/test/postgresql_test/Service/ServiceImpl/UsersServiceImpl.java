@@ -34,10 +34,18 @@ public class UsersServiceImpl implements UsersService {
         usersRepository.save(users);
     }
 
+    @Transactional(readOnly = true)
     public Set<CfrData> findCfrAll(Long id) {
         Users users = usersRepository.findById(id).orElseThrow(() -> {
             throw new IllegalArgumentException("아이디를 찾을 수 없음");
         });
         return users.getCfrDataList();
+    }
+
+    @Transactional(readOnly = true)
+    public Users findById(Long id) {
+        return usersRepository.findById(id).orElseThrow(() -> {
+            throw new IllegalArgumentException("user 찾을 수 없음");
+        });
     }
 }

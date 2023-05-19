@@ -13,4 +13,6 @@ public interface CfrDataRepository extends JpaRepository<CfrData, Long> {
 
     CfrData findTopByUsersId_IdOrderByCreateDateDesc(Long id);
 
+    List<CfrData> findTop10ByOrderByConfidenceDesc();
+
 }

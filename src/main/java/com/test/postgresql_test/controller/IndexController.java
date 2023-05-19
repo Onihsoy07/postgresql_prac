@@ -4,14 +4,11 @@ import com.test.postgresql_test.Service.ServiceImpl.BoardService;
 import com.test.postgresql_test.Service.UsersService;
 import com.test.postgresql_test.config.auth.PrincipalDetails;
 import com.test.postgresql_test.domain.Entity.CfrData;
-import com.test.postgresql_test.domain.dto.CfrResponseDto;
 import com.test.postgresql_test.domain.repository.CfrDataRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,6 +31,7 @@ public class IndexController {
     public String index(Model model,
                         @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         model.addAttribute("boards", boardService.boardList(pageable));
+        model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
         return "index";
     }
 
@@ -42,7 +39,8 @@ public class IndexController {
     public String boardView(@PathVariable final Long id,
                         Model model,
                         @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        model.addAttribute("boardView", boardService.boardFind(id));
+        model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
+        model.addAttribute("boardView", boardService.findById(id));
         model.addAttribute("boards", boardService.boardList(pageable));
         return "index";
     }
