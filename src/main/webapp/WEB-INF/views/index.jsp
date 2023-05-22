@@ -17,42 +17,46 @@
         </div>
     </aside>
 
-    <c:choose>
-            <c:when test="${not empty boardView}">
-                <div class="container-fluid" style="margin: 15px 40px;">
-                  <button class="btn btn-secondary" onclick="location.href='/'">목록</button>
-                  <c:if test="${boardView.users.id == principal.users.id}">
-                    <a href="/board/${boardView.id}/updateForm" class="btn btn-warning">수정</a>
-                    <button id="btn-delete" class="btn btn-danger">삭제</button>
-                  </c:if>
-                  <br/><br/>
-                  <div>
-                    작성자:<span><i>${boardView.users.username}</i>&nbsp;&nbsp;&nbsp;</span>
-                    글 번호:<span id="id"><i>${boardView.id}</i></span>
+    <c:if test="${not empty boardView}">
+        <div class="container-fluid" style="margin: 15px 40px;">
+          <button class="btn btn-secondary" onclick="location.href='/'">목록</button>
+          <c:if test="${boardView.users.id == principal.users.id}">
+            <a href="/board/${boardView.id}/updateForm" class="btn btn-warning">수정</a>
+            <button id="btn-delete" class="btn btn-danger">삭제</button>
+          </c:if>
+          <br/><br/>
+          <div>
+            작성자:<span><i>${boardView.users.username}</i>&nbsp;&nbsp;&nbsp;</span>
+            글 번호:<span id="id"><i>${boardView.id}</i></span>
+          </div>
+          <br/>
+          <div>
+            <h3>${boardView.title}</h3>
+          </div>
+          <hr>
+          <div>
+            <div>${boardView.content}</div>
+          </div>
+            <div class="card-body">
+                <div class="row">
+                  <div class="form-group col-sm-8">
+                    <input class="form-control input-sm" id="comment" type="text" placeholder="댓글 입력...">
                   </div>
-                  <br/>
-                  <div>
-                    <h3>${boardView.title}</h3>
+                  <div class="form-group col-sm-2">
+                    <button type="button" class="btn btn-primary" id="btn-replySave">
+                        저장
+                    </button>
                   </div>
-                  <hr>
-                  <div>
-                    <div>${boardView.content}</div>
-                  </div>
-                    <div class="card-body">
-                        <div class="row">
-                          <div class="form-group col-sm-8">
-                            <input class="form-control input-sm" id="comment" type="text" placeholder="댓글 입력...">
-                          </div>
-                          <div class="form-group col-sm-2">
-                            <button type="button" class="btn btn-primary" id="btn-replySave">
-                                저장
-                            </button>
-                          </div>
-                        </div>
-                    </div>
                 </div>
-            </c:when>
-    </c:choose>
+            </div>
+            <c:forEach var="reply" items="${replyList}">
+                <div style="display:flex;margin-top:10px;" class="comment_${reply.id}">
+                    <span style="width:130px;">${reply.comment} &nbsp;</span>
+                    <button type="button" onclick="newHello(${reply.id})">버튼</button>
+                </div>
+            </c:forEach>
+        </div>
+    </c:if>
 
     <section class="content">
         <div class="container-fluid" style="height:800px;margin:15px;">

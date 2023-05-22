@@ -4,7 +4,9 @@ import com.test.postgresql_test.Service.ServiceImpl.BoardService;
 import com.test.postgresql_test.Service.UsersService;
 import com.test.postgresql_test.config.auth.PrincipalDetails;
 import com.test.postgresql_test.domain.Entity.CfrData;
+import com.test.postgresql_test.domain.Entity.Reply;
 import com.test.postgresql_test.domain.repository.CfrDataRepository;
+import com.test.postgresql_test.domain.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -25,6 +27,8 @@ public class IndexController {
 
     private final CfrDataRepository cfrDataRepository;
 
+    private final ReplyRepository replyRepository;
+
     private final BoardService boardService;
 
     @GetMapping({"/",""})
@@ -39,6 +43,12 @@ public class IndexController {
     public String boardView(@PathVariable final Long id,
                         Model model,
                         @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        List<Reply> replyList = replyRepository.findByBoard_IdOrderByCreateDateAsc(id);
+        for (Reply reply : replyList) {
+            System.out.println("-------------------------------------------------------------");
+            System.out.println(reply.getComment());
+        }
+        model.addAttribute("replyList", replyList);
         model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
         model.addAttribute("boardView", boardService.findById(id));
         model.addAttribute("boards", boardService.boardList(pageable));

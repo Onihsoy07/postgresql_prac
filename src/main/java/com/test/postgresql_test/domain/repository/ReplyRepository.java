@@ -2,6 +2,13 @@ package com.test.postgresql_test.domain.repository;
 
 import com.test.postgresql_test.domain.Entity.Reply;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
+
+    List<Reply> findByBoard_IdOrderByCreateDateAsc(Long id);
+
 }

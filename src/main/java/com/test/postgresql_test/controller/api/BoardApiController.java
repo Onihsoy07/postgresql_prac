@@ -19,7 +19,7 @@ public class BoardApiController {
 
     private final BoardService boardService;
 
-    @PostMapping("/board/{id}")
+    @PostMapping("/board")
     public ResponseDto<String> writeBoard(@RequestBody final WriteBoardDto writeBoardDto,
                                              @AuthenticationPrincipal PrincipalDetails principal) {
         boardService.boardSave(writeBoardDto, principal.getUsers());

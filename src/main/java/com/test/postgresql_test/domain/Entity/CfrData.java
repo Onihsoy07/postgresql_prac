@@ -28,7 +28,7 @@ public class CfrData extends Base {
     @OrderBy("createDate")
     private Float confidence;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     private Users users;
 

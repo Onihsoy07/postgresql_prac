@@ -20,7 +20,7 @@
                 <td>${cfrData.value}</td>
                 <td>${cfrData.confidence}</td>
                 <td>${cfrData.createDate}</td>
-                <td><button onclick="()" class="badge">글쓰기</button></td>
+                <td><a type="button" class="badge" href="/board/${cfrData.id}">글쓰기</a></td>
               </tr>
 
             </c:forEach>
@@ -30,5 +30,7 @@
 </div>
 
 <script src="/js/cfr.js"></script>
+<script src="/js/board.js"></script>
+
 
 <%@ include file="../layout/footer.jsp" %>

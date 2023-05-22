@@ -7,6 +7,10 @@
 
         <input type="hidden" id="id" value="${principal.users.id}">
 
+        <div class="container">
+            <span>${cfrData.value}&nbsp;&nbsp;${cfrData.confidence}</span>
+        </div>
+
         <div class="form-group">
           <label for="title">Title</label>
           <input type="text" class="form-control" placeholder="Enter Title" id="title" name="title">

@@ -29,3 +29,9 @@ $(function() {
     });
 
 });
+
+function newHello(id) {
+    $(`.comment_${id}`).after('<div>hello</div>');
+//    $(`.comment_${id}`).text('hello');
+
+}

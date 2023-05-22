@@ -9,6 +9,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @NoArgsConstructor
@@ -17,8 +18,20 @@ import java.time.LocalDateTime;
 public abstract class Base {
 
     @CreatedDate
-    private LocalDateTime createDate;
+    private String createDate;
 
     @LastModifiedDate
-    private LocalDateTime updateDate;
+    private String updateDate;
+
+    @PrePersist
+    public void onPrePersist(){
+        this.createDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+        this.updateDate = this.createDate;
+    }
+
+    //엔티티 update 이전 실행
+    @PreUpdate
+    public void onPreUpdate() {
+        this.updateDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+    }
 }

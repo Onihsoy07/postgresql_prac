@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Builder
 @Table(schema = "postgresql_test")
-public class Reply {
+public class Reply extends Base {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,11 +24,11 @@ public class Reply {
 
     private int level;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     private Board board;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     private Users users;
 
