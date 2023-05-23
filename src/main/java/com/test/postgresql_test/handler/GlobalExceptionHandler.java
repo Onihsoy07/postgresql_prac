@@ -18,16 +18,16 @@ public class GlobalExceptionHandler {
 
     private final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseDto<String> globalIllegalArgumentExceptionHandler(IllegalArgumentException e) {
-        return new ResponseDto<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
-    }
+//    @ExceptionHandler(IllegalArgumentException.class)
+//    public ResponseDto<String> globalIllegalArgumentExceptionHandler(IllegalArgumentException e) {
+//        return new ResponseDto<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
+//    }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseDto<String> globalExceptionHandler(Exception e) {
-       LOGGER.warn(e.getMessage());
-        return new ResponseDto<>(HttpStatus.BAD_REQUEST.value(), e.getMessage());
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseDto<String> globalExceptionHandler(Exception e) {
+//       LOGGER.warn(e.getMessage());
+//        return new ResponseDto<>(HttpStatus.BAD_REQUEST.value(), e.getMessage());
+//    }
 
 //    private String exceptionHandler(ResponseDto<String> responseDto,
 //                                    Model model) {
