@@ -2,7 +2,7 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="layout/header.jsp" %>
 
-<div class="main_wrap">
+<div class="main_wrap" style="margin-bottom:20px;">
     <aside>
         <div class="container-fluid">
           <ul class="list-group">
@@ -50,61 +50,76 @@
                 </div>
             </div>
             <c:forEach var="reply" items="${replyList}">
-                <div style="display:flex;margin-top:10px;" class="comment_${reply.id}">
+                <div style="display:flex;margin-top:10px;margin-left:calc(${reply.id}*5)px" name="comment_${reply.id}">
                     <span style="width:130px;">${reply.comment} &nbsp;</span>
-                    <button type="button" onclick="newHello(${reply.id})">버튼</button>
+                    <button type="button" onclick="newHello(${reply.id})" class="replyButton${reply.id}">버튼</button>
                 </div>
             </c:forEach>
         </div>
     </c:if>
 
-    <section class="content">
-        <div class="container-fluid" style="height:800px;margin:15px;">
+    <c:if test="${not empty boards}">
+        <section class="content">
+            <div class="container-fluid" style="height:800px;margin:15px;">
 
-            <div class="container-fluid" style="margin:30px 0px;">
-              <ul class="list-group">
-                <c:forEach var="board" items="${boards.content}">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      <a href="/${board.id}?page=${boards.number}">${board.title}</a>
-                      <span class="badge badge-primary badge-pill">${board.users.username}</span>
-                    </li>
-                </c:forEach>
-              </ul>
+                <div class="container-fluid" style="margin:30px 0px;">
+                  <ul class="list-group">
+                    <c:forEach var="board" items="${boards.content}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          <a href="/${board.id}?page=${boards.number+1}">${board.title}</a>
+                          <span class="badge badge-primary badge-pill">${board.users.username}</span>
+                        </li>
+                    </c:forEach>
+                  </ul>
+                </div>
+
+                <ul class="pagination justify-content-center">
+                  <c:choose>
+                    <c:when test="${boards.first}">
+                        <li class="page-item disabled"><a class="page-link" href="${state}page=${boards.number}">Previous</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item"><a class="page-link" href="${state}page=${boards.number}">Previous</a></li>
+                    </c:otherwise>
+                  </c:choose>
+                  <c:forEach var="cnt" begin="1" end="${boards.totalPages}">
+                    <c:choose>
+                      <c:when test="${boards.number == cnt-1}">
+                        <li class="page-item active"><a class="page-link" href="${state}page=${cnt}">${cnt}</a></li>
+                      </c:when>
+                      <c:otherwise>
+                        <li class="page-item"><a class="page-link" href="${state}page=${cnt}">${cnt}</a></li>
+                      </c:otherwise>
+                    </c:choose>
+                  </c:forEach>
+                  <c:choose>
+                    <c:when test="${boards.last}">
+                        <li class="page-item disabled"><a class="page-link" href="${state}page=${boards.number+2}">Previous</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item"><a class="page-link" href="${state}page=${boards.number+2}">Previous</a></li>
+                    </c:otherwise>
+                  </c:choose>
+                </ul>
+
             </div>
 
-            <ul class="pagination justify-content-center">
-              <c:choose>
-                <c:when test="${boards.first}">
-                    <li class="page-item disabled"><a class="page-link" href="/?page=${boards.number-1}">Previous</a></li>
-                </c:when>
-                <c:otherwise>
-                    <li class="page-item"><a class="page-link" href="/?page=${boards.number-1}">Previous</a></li>
-                </c:otherwise>
-              </c:choose>
-              <c:forEach var="cnt" begin="1" end="${boards.totalPages}">
-                <c:choose>
-                  <c:when test="${boards.number == cnt-1}">
-                    <li class="page-item active"><a class="page-link" href="/?page=${cnt-1}">${cnt}</a></li>
-                  </c:when>
-                  <c:otherwise>
-                    <li class="page-item"><a class="page-link" href="/?page=${cnt-1}">${cnt}</a></li>
-                  </c:otherwise>
-                </c:choose>
-              </c:forEach>
-              <c:choose>
-                <c:when test="${boards.last}">
-                    <li class="page-item disabled"><a class="page-link" href="/?page=${boards.number+1}">Previous</a></li>
-                </c:when>
-                <c:otherwise>
-                    <li class="page-item"><a class="page-link" href="/?page=${boards.number+1}">Previous</a></li>
-                </c:otherwise>
-              </c:choose>
-            </ul>
+            <div class="searchBox">
+                <input class="searchInput" id="searchInput" type="text" />
+                <button class="searchButton" type="button" onclick="boardSearch()">
+                    <img class="image-thumb" src="https://media.istockphoto.com/id/1167683205/ko/%EB%B2%A1%ED%84%B0/%EA%B2%80%EC%83%89-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=zFYCQOhkQmFkjFOz8B0SnZpwnDv_M_n1D2jgrfzkLfk=">
+                </button>
+            </div>
+        </section>
+    </c:if>
 
-        </div>
-    </section>
+
 </div>
 
+
+
+
 <script src="/js/reply.js"></script>
+<script src="/js/board.js"></script>
 
 <%@ include file="layout/footer.jsp" %>

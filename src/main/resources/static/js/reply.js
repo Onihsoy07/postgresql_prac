@@ -31,7 +31,15 @@ $(function() {
 });
 
 function newHello(id) {
-    $(`.comment_${id}`).after('<div>hello</div>');
-//    $(`.comment_${id}`).text('hello');
+    $(`replyButton${id}`).css("display", "none");
+    $('div').remove(`div[name=temp]`);
+    var commentBox = $(`div[name=comment_${id}]`).clone();
+//    console.log(this(commentBox));
+    commentBox.css("margin-left", "50px");
+    commentBox.find("span").text("hello~~~");
+    commentBox.find("button").text("바바바바바바바바ㅏ");
+
+    commentBox.attr("name", "temp");
+    $(`div[name=comment_${id}]`).after(commentBox);
 
 }

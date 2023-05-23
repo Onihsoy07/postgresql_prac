@@ -38,6 +38,13 @@ $(function() {
 
 });
 
+function boardSearch() {
+    let sd = $('#searchInput').val();
+    location.href = `/search?kw=${sd}`;
+}
+
+
+
 //function cfrBoard(let id) {
 //    $.ajax({
 //        url : "/board/" + id,

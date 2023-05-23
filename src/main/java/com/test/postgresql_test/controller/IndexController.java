@@ -3,11 +3,14 @@ package com.test.postgresql_test.controller;
 import com.test.postgresql_test.Service.ServiceImpl.BoardService;
 import com.test.postgresql_test.Service.UsersService;
 import com.test.postgresql_test.config.auth.PrincipalDetails;
+import com.test.postgresql_test.domain.Entity.Board;
 import com.test.postgresql_test.domain.Entity.CfrData;
 import com.test.postgresql_test.domain.Entity.Reply;
+import com.test.postgresql_test.domain.repository.BoardRepository;
 import com.test.postgresql_test.domain.repository.CfrDataRepository;
 import com.test.postgresql_test.domain.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -29,29 +33,44 @@ public class IndexController {
 
     private final ReplyRepository replyRepository;
 
+    private  final BoardRepository boardRepository;
+
     private final BoardService boardService;
+
+    private PageRequest cusPageable(Pageable pageable) {
+        System.out.println(pageable.getPageSize());
+        return PageRequest.of((pageable.getPageNumber()==0)?0:pageable.getPageNumber()-1, 15, Sort.by("createDate").descending());
+    }
 
     @GetMapping({"/",""})
     public String index(Model model,
                         @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        model.addAttribute("boards", boardService.boardList(pageable));
+        model.addAttribute("state", "/?");
+        model.addAttribute("boards", boardService.boardList(cusPageable(pageable)));
         model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
         return "index";
     }
 
     @GetMapping({"/{id}"})
     public String boardView(@PathVariable final Long id,
-                        Model model,
-                        @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        List<Reply> replyList = replyRepository.findByBoard_IdOrderByCreateDateAsc(id);
-        for (Reply reply : replyList) {
-            System.out.println("-------------------------------------------------------------");
-            System.out.println(reply.getComment());
-        }
-        model.addAttribute("replyList", replyList);
+                            Model model,
+                            @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        model.addAttribute("state", "/?");
+        model.addAttribute("replyList", replyRepository.findByBoard_IdOrderByCreateDateAsc(id));
         model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
         model.addAttribute("boardView", boardService.findById(id));
-        model.addAttribute("boards", boardService.boardList(pageable));
+        model.addAttribute("boards", boardService.boardList(cusPageable(pageable)));
+        return "index";
+    }
+
+    @GetMapping({"/search"})
+    public String boardSearch(@RequestParam("kw") final String keyword,
+                            Model model,
+                            @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable
+                                            ) {
+        model.addAttribute("state", String.format("/search?kw=%s&", keyword));
+        model.addAttribute("boards", boardRepository.findByTitleContainingOrderByCreateDateAsc(keyword, cusPageable(pageable)));
+        model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
         return "index";
     }
 
