@@ -39,7 +39,7 @@ public class IndexController {
 
     private PageRequest cusPageable(Pageable pageable) {
         System.out.println(pageable.getPageSize());
-        return PageRequest.of((pageable.getPageNumber()==0)?0:pageable.getPageNumber()-1, 15, Sort.by("createDate").descending());
+        return PageRequest.of((pageable.getPageNumber()==0)?0:pageable.getPageNumber()-1, 15, Sort.by("id").descending());
     }
 
     @GetMapping({"/",""})

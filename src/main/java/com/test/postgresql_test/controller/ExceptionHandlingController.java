@@ -31,6 +31,10 @@ public class ExceptionHandlingController implements ErrorController {
         // 에러 코드에 대한 상태 정보
         HttpStatus httpStatus = HttpStatus.valueOf(Integer.valueOf(status.toString()));
 
+        System.out.println("error getReasonPhrase: " + httpStatus.getReasonPhrase());
+        System.out.println("error name : " + httpStatus.name());
+
+
         if (status != null) {
             // HttpStatus와 비교해 페이지 분기를 나누기 위한 변수
             int statusCode = Integer.valueOf(status.toString());

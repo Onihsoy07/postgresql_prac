@@ -20,3 +20,51 @@
     height:100%;
     object-fit:cover;
 }
+
+.cusHov:hover {
+  background-color: #CCCCCC;
+}
+
+.head {
+    background-color : gray;
+    padding : 15px 20px;
+}
+
+a {
+    text-decoration:none;
+}
+
+a:link    { text-decoration:none; }
+a:visited { text-decoration:none; }
+a:hover   { text-decoration:none; }
+a:active  { text-decoration:none; }
+
+.col-title {
+    width : 45%;
+    text-align : left;
+    color : black;
+}
+
+.col-author {
+    width : 15%;
+    text-align : left;
+    color : black;
+}
+
+.col-time {
+    width : 20%;
+    text-align : center;
+    color : black;
+}
+
+.col-view {
+    width : 10%;
+    text-align : center;
+    color : black;
+}
+
+.col-good {
+    width : 10%;
+    text-align : center;
+    color : black;
+}

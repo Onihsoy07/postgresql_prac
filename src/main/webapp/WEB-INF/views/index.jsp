@@ -50,7 +50,7 @@
                 </div>
             </div>
             <c:forEach var="reply" items="${replyList}">
-                <div style="display:flex;margin-top:10px;margin-left:calc(${reply.id}*5)px" name="comment_${reply.id}">
+                <div style="display:flex;margin-top:10px;margin-left:${reply.id*10}px" name="comment_${reply.id}">
                     <span style="width:130px;">${reply.comment} &nbsp;</span>
                     <button type="button" onclick="newHello(${reply.id})" class="replyButton${reply.id}">버튼</button>
                 </div>
@@ -60,14 +60,26 @@
 
     <c:if test="${not empty boards}">
         <section class="content">
-            <div class="container-fluid" style="height:800px;margin:15px;">
+            <div class="container-fluid" style="margin:15px;">
 
-                <div class="container-fluid" style="margin:30px 0px;">
+                <div class="container-fluid" style="margin:30px 0px;color:gray;">
                   <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center head">
+                        <div class="col-title">제목</div>
+                        <div class="col-author">작성자</div>
+                        <div class="col-time">작성일</div>
+                        <div class="col-view">조회수</div>
+                        <div class="col-good">추천</div>
+                    </li>
                     <c:forEach var="board" items="${boards.content}">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                          <a href="/${board.id}?page=${boards.number+1}">${board.title}</a>
-                          <span class="badge badge-primary badge-pill">${board.users.username}</span>
+                        <li class="list-group-item d-flex justify-content-between align-items-center cusHov" style="padding:0px;">
+                          <a class="d-flex justify-content-between" href="/${board.id}?page=${boards.number+1}" style="padding:15px 20px;width:100%;">
+                            <div class="col-title">${board.title}</div>
+                            <div class="col-author">${board.users.username}</div>
+                            <div class="col-time">${board.createDate.substring(11, 16)}</div>
+                            <div class="col-view">0</div>
+                            <div class="col-good">좋아요</div>
+                          </a>
                         </li>
                     </c:forEach>
                   </ul>
@@ -104,11 +116,17 @@
 
             </div>
 
-            <div class="searchBox">
-                <input class="searchInput" id="searchInput" type="text" />
-                <button class="searchButton" type="button" onclick="boardSearch()">
-                    <img class="image-thumb" src="https://media.istockphoto.com/id/1167683205/ko/%EB%B2%A1%ED%84%B0/%EA%B2%80%EC%83%89-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=zFYCQOhkQmFkjFOz8B0SnZpwnDv_M_n1D2jgrfzkLfk=">
-                </button>
+            <div>
+                <div class="searchBox">
+                    <input class="searchInput" id="searchInput" type="text" />
+                    <button class="searchButton" type="button" onclick="boardSearch()">
+                        <img class="image-thumb" src="https://media.istockphoto.com/id/1167683205/ko/%EB%B2%A1%ED%84%B0/%EA%B2%80%EC%83%89-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=zFYCQOhkQmFkjFOz8B0SnZpwnDv_M_n1D2jgrfzkLfk=">
+                    </button>
+                </div>
+                <select name="searchKeyword">
+                    <option value="title">제목</option>
+                    <option value="writer">작성자</option>
+                </select>
             </div>
         </section>
     </c:if>

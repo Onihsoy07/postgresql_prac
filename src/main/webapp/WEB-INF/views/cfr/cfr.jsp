@@ -5,7 +5,7 @@
 <div style="height:1000px;margin:15px;">
     <input type="hidden" id="id" value="${principal.users.id}" />
     <form id="uploadForm" enctype="multipart/form-data">
-        <input type="file" id="imageInput" />
+        <input type="file" id="imageInput" accept="image/jpeg, image/png" required/>
         <button type="button" id="btn-cfrRequest">제출</button>
     </form>
 </div>
