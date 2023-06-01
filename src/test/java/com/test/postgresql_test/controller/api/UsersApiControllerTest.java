@@ -1,6 +1,7 @@
 package com.test.postgresql_test.controller.api;
 
 import com.test.postgresql_test.Service.UsersService;
+import com.test.postgresql_test.domain.Entity.Reply;
 import com.test.postgresql_test.domain.Entity.Users;
 import com.test.postgresql_test.domain.dto.UsersJoinDto;
 import com.test.postgresql_test.domain.repository.UsersRepository;
@@ -11,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -47,7 +50,9 @@ class UsersApiControllerTest {
         assertThat(users.getUsername()).isEqualTo(usersJoinDto.getUsername());
 //        뭐지 왜 다르지?
 //        assertThat(users.getPassword()).isEqualTo(passwordEncoder.encode(usersJoinDto.getPassword()));
-
-
     }
+
+    private List<Reply> ReReplys = new ArrayList<>();
+
+    
 }

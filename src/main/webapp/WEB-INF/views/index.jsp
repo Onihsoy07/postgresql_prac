@@ -3,19 +3,6 @@
 <%@ include file="layout/header.jsp" %>
 
 <div class="main_wrap" style="margin-bottom:20px;">
-    <aside>
-        <div class="container-fluid">
-          <ul class="list-group">
-            <c:forEach var="cfr" items="${topRateCfr}">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <a href="#">${cfr.value}</a>
-                  <p>${cfr.confidence}</p>
-                  <span class="badge badge-primary badge-pill">${cfr.users.username}</span>
-                </li>
-            </c:forEach>
-          </ul>
-        </div>
-    </aside>
 
     <c:if test="${not empty boardView}">
         <div class="container-fluid" style="margin: 15px 40px;">
@@ -60,29 +47,40 @@
 
     <c:if test="${not empty boards}">
         <section class="content">
-            <div class="container-fluid" style="margin:15px;">
+            <div class="container-fluid">
 
                 <div class="container-fluid" style="margin:30px 0px;color:gray;">
-                  <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-center head">
-                        <div class="col-title">제목</div>
-                        <div class="col-author">작성자</div>
-                        <div class="col-time">작성일</div>
-                        <div class="col-view">조회수</div>
-                        <div class="col-good">추천</div>
-                    </li>
+                  <div class="list-group cus-list">
+                    <div class="list-group-item align-items-center list-head">
+                        <div class="row-top">
+                            <div class="col-title">제목</div>
+                        </div>
+                        <div class="d-flex justify-content-between row-bottom">
+                            <div class="col-author">작성자</div>
+                            <div class="col-time">작성일</div>
+                            <div class="col-view">조회수</div>
+                            <div class="col-good">추천</div>
+                        </div>
+                    </div>
                     <c:forEach var="board" items="${boards.content}">
-                        <li class="list-group-item d-flex justify-content-between align-items-center cusHov" style="padding:0px;">
-                          <a class="d-flex justify-content-between" href="/${board.id}?page=${boards.number+1}" style="padding:15px 20px;width:100%;">
-                            <div class="col-title">${board.title}</div>
-                            <div class="col-author">${board.users.username}</div>
-                            <div class="col-time">${board.createDate.substring(11, 16)}</div>
-                            <div class="col-view">0</div>
-                            <div class="col-good">좋아요</div>
+                        <div class="cusHov list-body" style="padding:0px;">
+                          <a class="list-bodyInner" href="/${board.id}?page=${boards.number+1}">
+                            <div class="row-top">
+                                <div class="col-title">${board.title}</div>
+                            </div>
+                            <div class="row-bottom">
+                                <div class="col-author">${board.users.username}</div>
+                                <div class="row-bottom-rightInner">
+                                    <div class="col-time">${board.createDate.substring(11, 16)}</div>
+                                    <div class="col-view">0</div>
+                                    <div class="col-good">0</div>
+                                </div>
+                            </div>
                           </a>
-                        </li>
+                        </div>
                     </c:forEach>
-                  </ul>
+
+                  </div>
                 </div>
 
                 <ul class="pagination justify-content-center">
@@ -118,18 +116,34 @@
 
             <div>
                 <div class="searchBox">
+                    <select id="searchKeyword">
+                        <option value="title">제목</option>
+                        <option value="writer">작성자</option>
+                    </select>
                     <input class="searchInput" id="searchInput" type="text" />
                     <button class="searchButton" type="button" onclick="boardSearch()">
                         <img class="image-thumb" src="https://media.istockphoto.com/id/1167683205/ko/%EB%B2%A1%ED%84%B0/%EA%B2%80%EC%83%89-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=zFYCQOhkQmFkjFOz8B0SnZpwnDv_M_n1D2jgrfzkLfk=">
                     </button>
+
                 </div>
-                <select name="searchKeyword">
-                    <option value="title">제목</option>
-                    <option value="writer">작성자</option>
-                </select>
+
             </div>
         </section>
     </c:if>
+
+        <aside class="main_aside">
+            <div class="container-fluid">
+              <ul class="list-group">
+                <c:forEach var="cfr" items="${topRateCfr}">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      <a href="#">${cfr.value}</a>
+                      <p>${cfr.confidence}</p>
+                      <span class="badge badge-primary badge-pill">${cfr.users.username}</span>
+                    </li>
+                </c:forEach>
+              </ul>
+            </div>
+        </aside>
 
 
 </div>
@@ -139,5 +153,6 @@
 
 <script src="/js/reply.js"></script>
 <script src="/js/board.js"></script>
+<link rel="stylesheet" href="/css/main.css" />
 
 <%@ include file="layout/footer.jsp" %>

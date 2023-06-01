@@ -39,8 +39,10 @@ $(function() {
 });
 
 function boardSearch() {
+    //select option 확인
+    let target = $('#searchKeyword option:selected').val();
     let sd = $('#searchInput').val();
-    location.href = `/search?kw=${sd}`;
+    location.href = `/search?target=${target}&keyword=${sd}`;
 }
 
 

@@ -1,3 +1,32 @@
+.fakeimg {
+height: 200px;
+background: #aaa;
+}
+
+aside {
+    width: 30%;
+    height: 800px;
+    padding-left: a0px;
+    padding-top: a10px;
+    margin: 15px;
+    float: left;
+    font-style: italic;
+}
+
+.content {
+  background-color: white;
+  padding-top: 5px;
+  width: 67%;
+  float: left;
+}
+
+.main_wrap {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 29px auto 0 auto;
+}
+
 .searchBox {
     justify-content: center;
     display: flex;
@@ -25,13 +54,31 @@
   background-color: #CCCCCC;
 }
 
-.head {
-    background-color : gray;
-    padding : 15px 20px;
+.cus-list {
+    border-width: 1px 1px 0px 1px;
+    border-style: solid;
+}
+
+.list-head {
+    display: flex;
+    background-color: gray;
+    padding: 15px 20px;
+    border-bottom: 1px solid;
+}
+
+.list-body {
+    background-color: white;
+    border-bottom: 1px solid;
+}
+
+.list-bodyInner {
+    display: flex;
+    padding: 10px;
+    width:100%;
 }
 
 a {
-    text-decoration:none;
+    text-decoration: none;
 }
 
 a:link    { text-decoration:none; }
@@ -40,31 +87,111 @@ a:hover   { text-decoration:none; }
 a:active  { text-decoration:none; }
 
 .col-title {
-    width : 45%;
-    text-align : left;
-    color : black;
+    font-size: 16px;
+    width: 100%;
+    text-align: left;
+    color: black;
 }
 
 .col-author {
-    width : 15%;
-    text-align : left;
-    color : black;
+    font-size: 14px;
+    width: 20%;
+    text-align: left;
+    color: black;
 }
 
 .col-time {
-    width : 20%;
-    text-align : center;
-    color : black;
+    font-size: 14px;
+    width: 50%;
+    text-align: center;
+    color: black;
 }
 
 .col-view {
-    width : 10%;
-    text-align : center;
-    color : black;
+    font-size: 14px;
+    width: 25%;
+    text-align: center;
+    color: black;
 }
 
 .col-good {
-    width : 10%;
-    text-align : center;
-    color : black;
+    font-size: 14px;
+    width: 25%;
+    text-align: center;
+    color: black;
+}
+
+.row-top {
+    width: 45%;
+}
+
+.row-bottom {
+    display: flex;
+    width: 55%;
+}
+
+.row-bottom-rightInner {
+    width: 80%;
+    display: flex;
+}
+
+@media (max-width: 1050px) {
+    .html {
+        font-size: 6px;
+    }
+
+    .main_aside {
+        width: 100%;
+        display: block;
+    }
+
+    .content {
+        width: 100%;
+        display: block;
+    }
+
+    .list-head {
+        display: none;
+    }
+
+    .col-author, .col-time, .col-view, .col-good {
+        width: auto;
+        color: grey;
+    }
+
+    .col-time::after {
+       content: "|";
+       margin: 0 5px 0 5px;
+    }
+
+    .col-view::before {
+        content: "조회    ";
+    }
+
+    .col-view::after {
+        content: "|";
+        margin: 0 5px 0 5px;
+    }
+
+    .col-good::before {
+        content: "추천    ";
+    }
+
+    .list-bodyInner {
+        display: block;
+    }
+
+    .row-top {
+        width: 100%;
+    }
+
+    .row-bottom {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .row-bottom-rightInner {
+        width: auto;
+    }
+
 }

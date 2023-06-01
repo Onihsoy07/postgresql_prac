@@ -39,4 +39,16 @@ public class BoardService {
         });
     }
 
+    @Transactional(readOnly = true)
+    public Page<Board> searchBoard(String target, String keyword, Pageable pageable) {
+        System.out.println(target);
+        if ("title".equals(target)) {
+            return boardRepository.findByTitleContainingOrderByCreateDateAsc(keyword, pageable);
+        } else if ("writer".equals(target)) {
+            return boardRepository.findByUsers_usernameContainingOrderByCreateDateAsc(keyword, pageable);
+        } else {
+            throw new IllegalArgumentException("타겟 에러");
+        }
+    }
+
 }

@@ -10,5 +10,6 @@ import java.util.*;
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
     Page<Board> findByTitleContainingOrderByCreateDateAsc(String keyword, Pageable pageable);
+    Page<Board> findByUsers_usernameContainingOrderByCreateDateAsc(String keyword, Pageable pageable);
 
 }
