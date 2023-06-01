@@ -63,6 +63,20 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping({"/{id}/search"})
+    public String searchBoardView(@PathVariable final Long id,
+                                  @RequestParam("target") final String target,
+                                  @RequestParam("keyword") final String keyword,
+                                  Model model,
+                                  @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        model.addAttribute("state", String.format("/search?target=%s&keyword=%s&", target, keyword));
+        model.addAttribute("replyList", replyRepository.findByBoard_IdOrderByCreateDateAsc(id));
+        model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
+        model.addAttribute("boardView", boardService.findById(id));
+        model.addAttribute("boards", boardService.searchBoard(target, keyword, cusPageable(pageable)));
+        return "index";
+    }
+
     @GetMapping({"/search"})
     public String boardSearch(@RequestParam("target") final String target,
                             @RequestParam("keyword") final String keyword,

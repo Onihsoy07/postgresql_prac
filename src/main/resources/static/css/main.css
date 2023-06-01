@@ -4,20 +4,13 @@ background: #aaa;
 }
 
 aside {
-    width: 30%;
-    height: 800px;
-    padding-left: a0px;
-    padding-top: a10px;
-    margin: 15px;
-    float: left;
+    margin: 5px;
     font-style: italic;
 }
 
 .content {
   background-color: white;
   padding-top: 5px;
-  width: 67%;
-  float: left;
 }
 
 .main_wrap {
@@ -25,6 +18,9 @@ aside {
   position: relative;
   width: 100%;
   margin: 29px auto 0 auto;
+  margin-bottom:20px;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
 }
 
 .searchBox {
@@ -136,18 +132,8 @@ a:active  { text-decoration:none; }
 }
 
 @media (max-width: 1050px) {
-    .html {
-        font-size: 6px;
-    }
-
-    .main_aside {
-        width: 100%;
-        display: block;
-    }
-
-    .content {
-        width: 100%;
-        display: block;
+    .main_wrap {
+      grid-template-columns: 1fr;
     }
 
     .list-head {

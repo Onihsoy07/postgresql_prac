@@ -31,17 +31,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().disable()
                 .httpBasic().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+                .antMatchers("/cfr").hasRole("USER")
+                .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/auth/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .loginProcessingUrl("/auth/loginProc")
-                .defaultSuccessUrl("/");
+                .defaultSuccessUrl("/")
+                .and()
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/");
     }
 
     @Override

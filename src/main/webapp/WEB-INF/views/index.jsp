@@ -2,10 +2,10 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="layout/header.jsp" %>
 
-<div class="main_wrap" style="margin-bottom:20px;">
+<div class="main_wrap">
 
     <c:if test="${not empty boardView}">
-        <div class="container-fluid" style="margin: 15px 40px;">
+        <div class="container-fluid">
           <button class="btn btn-secondary" onclick="location.href='/'">목록</button>
           <c:if test="${boardView.users.id == principal.users.id}">
             <a href="/board/${boardView.id}/updateForm" class="btn btn-warning">수정</a>
@@ -24,18 +24,20 @@
           <div>
             <div>${boardView.content}</div>
           </div>
-            <div class="card-body">
-                <div class="row">
-                  <div class="form-group col-sm-8">
-                    <input class="form-control input-sm" id="comment" type="text" placeholder="댓글 입력...">
-                  </div>
-                  <div class="form-group col-sm-2">
-                    <button type="button" class="btn btn-primary" id="btn-replySave">
-                        저장
-                    </button>
-                  </div>
+            <c:if test="${not empty principal}">
+                <div class="card-body">
+                    <div class="row">
+                      <div class="form-group col-sm-8">
+                        <input class="form-control input-sm" id="comment" type="text" placeholder="댓글 입력...">
+                      </div>
+                      <div class="form-group col-sm-2">
+                        <button type="button" class="btn btn-primary" id="btn-replySave">
+                            저장
+                        </button>
+                      </div>
+                    </div>
                 </div>
-            </div>
+            </c:if>
             <c:forEach var="reply" items="${replyList}">
                 <div style="display:flex;margin-top:10px;margin-left:${reply.id*10}px" name="comment_${reply.id}">
                     <span style="width:130px;">${reply.comment} &nbsp;</span>
@@ -49,7 +51,7 @@
         <section class="content">
             <div class="container-fluid">
 
-                <div class="container-fluid" style="margin:30px 0px;color:gray;">
+                <div class="container-fluid">
                   <div class="list-group cus-list">
                     <div class="list-group-item align-items-center list-head">
                         <div class="row-top">
@@ -63,8 +65,8 @@
                         </div>
                     </div>
                     <c:forEach var="board" items="${boards.content}">
-                        <div class="cusHov list-body" style="padding:0px;">
-                          <a class="list-bodyInner" href="/${board.id}?page=${boards.number+1}">
+                        <div class="cusHov list-body">
+                          <a class="list-bodyInner" href="/${board.id}${state}page=${boards.number+1}">
                             <div class="row-top">
                                 <div class="col-title">${board.title}</div>
                             </div>
