@@ -51,7 +51,7 @@
         <section class="content">
             <div class="container-fluid">
 
-                <div class="container-fluid">
+                <div class="list_wrap">
                   <div class="list-group cus-list">
                     <div class="list-group-item align-items-center list-head">
                         <div class="row-top">
@@ -88,10 +88,10 @@
                 <ul class="pagination justify-content-center">
                   <c:choose>
                     <c:when test="${boards.first}">
-                        <li class="page-item disabled"><a class="page-link" href="${state}page=${boards.number}">Previous</a></li>
+                        <li class="page-item disabled"><a class="page-link" href="${state}page=${boards.number}"><</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="${state}page=${boards.number}">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="${state}page=${boards.number}"><</a></li>
                     </c:otherwise>
                   </c:choose>
                   <c:forEach var="cnt" begin="1" end="${boards.totalPages}">
@@ -106,30 +106,39 @@
                   </c:forEach>
                   <c:choose>
                     <c:when test="${boards.last}">
-                        <li class="page-item disabled"><a class="page-link" href="${state}page=${boards.number+2}">Previous</a></li>
+                        <li class="page-item disabled"><a class="page-link" href="${state}page=${boards.number+2}">></a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="${state}page=${boards.number+2}">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="${state}page=${boards.number+2}">></a></li>
                     </c:otherwise>
                   </c:choose>
                 </ul>
 
-            </div>
-
-            <div>
-                <div class="searchBox">
-                    <select id="searchKeyword">
-                        <option value="title">제목</option>
-                        <option value="writer">작성자</option>
-                    </select>
-                    <input class="searchInput" id="searchInput" type="text" />
-                    <button class="searchButton" type="button" onclick="boardSearch()">
-                        <img class="image-thumb" src="https://media.istockphoto.com/id/1167683205/ko/%EB%B2%A1%ED%84%B0/%EA%B2%80%EC%83%89-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=zFYCQOhkQmFkjFOz8B0SnZpwnDv_M_n1D2jgrfzkLfk=">
-                    </button>
-
+                <div class="pagination-wrapper">
+                    <ul class="pagination justify-content-center">
+                        <c:forEach var="cnt" begin="1" end="${boards.totalPages}">
+                            <li class="page-item">
+                                <a class="page-link" href="/b/hkstarrail?p=1">${cnt}</a>
+                            </li>
+                        </c:forEach>
+                    </ul>
                 </div>
 
             </div>
+
+
+            <div class="searchBox">
+                <select id="searchKeyword">
+                    <option value="title">제목</option>
+                    <option value="writer">작성자</option>
+                </select>
+                <input class="searchInput" id="searchInput" type="text" />
+                <button class="searchButton" type="button" onclick="boardSearch()">
+                    <img class="image-thumb" src="https://media.istockphoto.com/id/1167683205/ko/%EB%B2%A1%ED%84%B0/%EA%B2%80%EC%83%89-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=zFYCQOhkQmFkjFOz8B0SnZpwnDv_M_n1D2jgrfzkLfk=">
+                </button>
+
+            </div>
+
         </section>
     </c:if>
 

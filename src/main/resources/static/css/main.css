@@ -9,12 +9,18 @@ aside {
 }
 
 .content {
-  background-color: white;
-  padding-top: 5px;
+    overflow: auto;
+    background-color: white;
+    padding-top: 5px;
+}
+
+.list_wrap {
+    overflow: auto;
+    margin: 10px 10px;
 }
 
 .main_wrap {
-  overflow: hidden;
+  overflow: auto;
   position: relative;
   width: 100%;
   margin: 29px auto 0 auto;
@@ -23,16 +29,32 @@ aside {
   grid-template-columns: 3fr 1fr;
 }
 
+.pagination-wrapper {
+    margin-top: 5px;
+}
+
+.page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: gray;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
 .searchBox {
     justify-content: center;
+    overflow: auto;
     display: flex;
-    width: 400px;
+    width: auto;
     height: 45px;
     margin: 0 auto;
 }
 
 .searchInput {
-    width: 280px;
+    width: 400px;
 }
 
 .searchButton {
@@ -47,24 +69,28 @@ aside {
 }
 
 .cusHov:hover {
-  background-color: #CCCCCC;
+  background-color: #ddd;
 }
 
 .cus-list {
     border-width: 1px 1px 0px 1px;
     border-style: solid;
+    border-radius: 0px;
+    border-color: #bbb;
 }
 
 .list-head {
     display: flex;
-    background-color: gray;
+    background-color: #ddd;
     padding: 15px 20px;
     border-bottom: 1px solid;
+    border-color: #bbb;
 }
 
 .list-body {
     background-color: white;
     border-bottom: 1px solid;
+    border-color: #bbb;
 }
 
 .list-bodyInner {
@@ -75,12 +101,13 @@ aside {
 
 a {
     text-decoration: none;
+    color: gray;
 }
 
-a:link    { text-decoration:none; }
-a:visited { text-decoration:none; }
-a:hover   { text-decoration:none; }
-a:active  { text-decoration:none; }
+a:link    { text-decoration:none;color:gray; }
+a:visited { text-decoration:none;color:gray; }
+a:hover   { text-decoration:none;color:gray; }
+a:active  { text-decoration:none;color:gray; }
 
 .col-title {
     font-size: 16px;
@@ -140,9 +167,13 @@ a:active  { text-decoration:none; }
         display: none;
     }
 
+    .searchInput {
+        width: auto;
+    }
+
     .col-author, .col-time, .col-view, .col-good {
         width: auto;
-        color: grey;
+        color: gray;
     }
 
     .col-time::after {
@@ -178,6 +209,20 @@ a:active  { text-decoration:none; }
 
     .row-bottom-rightInner {
         width: auto;
+    }
+
+}
+
+@media (max-width: 450px) {
+    .list_wrap {
+        margin: 15px 0px;
+    }
+
+}
+
+@media (max-width: 330px) {
+    .searchInput {
+        width: 120px;
     }
 
 }
