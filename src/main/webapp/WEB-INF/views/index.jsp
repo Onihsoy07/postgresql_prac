@@ -74,7 +74,7 @@
                                 <div class="col-author">${board.users.username}</div>
                                 <div class="row-bottom-rightInner">
                                     <div class="col-time">${board.createDate.substring(11, 16)}</div>
-                                    <div class="col-view">0</div>
+                                    <div class="col-view">${board.viewCount}</div>
                                     <div class="col-good">0</div>
                                 </div>
                             </div>

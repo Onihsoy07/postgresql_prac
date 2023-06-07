@@ -26,6 +26,8 @@ public class Board extends Base {
     @Lob
     private String content;
 
+    private int viewCount;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     private Users users;

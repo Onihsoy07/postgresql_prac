@@ -44,3 +44,10 @@ open_api:
   naver:
     X_Naver_Client_Id: ENC(9B97xVDdud3c+pssOR1cnaHWI3t8H8VqnENMvX3ogrQ=)
     X_Naver_Client_Secret: ENC(aaKTEF/urPtJ/4NYLpHD0v3NHE4FiC6T)
+
+logging:
+  level:
+    org:
+      apache:
+        coyote:
+          http11: debug

@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -54,7 +56,10 @@ public class IndexController {
     @GetMapping({"/{id}"})
     public String boardView(@PathVariable final Long id,
                             Model model,
-                            @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+                            @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+                            HttpServletRequest request,
+                            HttpServletResponse response) {
+        response = boardService.viewCount(id, request, response);
         model.addAttribute("state", "/?");
         model.addAttribute("replyList", replyRepository.findByBoard_IdOrderByCreateDateAsc(id));
         model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
@@ -68,7 +73,10 @@ public class IndexController {
                                   @RequestParam("target") final String target,
                                   @RequestParam("keyword") final String keyword,
                                   Model model,
-                                  @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+                                  @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response) {
+        response = boardService.viewCount(id, request, response);
         model.addAttribute("state", String.format("/search?target=%s&keyword=%s&", target, keyword));
         model.addAttribute("replyList", replyRepository.findByBoard_IdOrderByCreateDateAsc(id));
         model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
