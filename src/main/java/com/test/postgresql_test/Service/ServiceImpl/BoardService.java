@@ -62,9 +62,7 @@ public class BoardService {
 
     @Transactional
     private void addViewCount(Long boardId) {
-        Board board = boardRepository.findById(boardId).orElseThrow(() -> {
-            throw new IllegalArgumentException("보드 찾을 수 없음");
-        });
+        Board board = findById(boardId);
         board.setViewCount(board.getViewCount()+1);
         boardRepository.save(board);
     }

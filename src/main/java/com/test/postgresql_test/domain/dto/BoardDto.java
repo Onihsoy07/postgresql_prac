@@ -13,7 +13,7 @@ public class BoardDto {
     private String content;
 
     @Builder
-    public BoardDto(String title, String content, int replyCnt) {
+    public BoardDto(String title, String content) {
         this.title = title;
         this.content = content;
     }

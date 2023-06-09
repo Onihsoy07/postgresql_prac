@@ -1,18 +1,11 @@
 package com.test.postgresql_test.controller;
 
 import com.test.postgresql_test.Service.ServiceImpl.BoardService;
-import com.test.postgresql_test.Service.UsersService;
 import com.test.postgresql_test.config.auth.PrincipalDetails;
-import com.test.postgresql_test.domain.Entity.Board;
-import com.test.postgresql_test.domain.Entity.CfrData;
-import com.test.postgresql_test.domain.Entity.Reply;
-import com.test.postgresql_test.domain.repository.BoardRepository;
-import com.test.postgresql_test.domain.repository.CfrDataRepository;
-import com.test.postgresql_test.domain.repository.ReplyRepository;
+import com.test.postgresql_test.domain.Entity.*;
+import com.test.postgresql_test.domain.repository.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -29,13 +22,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class IndexController {
 
-    private final UsersService usersService;
-
     private final CfrDataRepository cfrDataRepository;
 
     private final ReplyRepository replyRepository;
-
-    private  final BoardRepository boardRepository;
 
     private final BoardService boardService;
 
@@ -130,17 +119,20 @@ public class IndexController {
         if (id != principal.getUsers().getId()) {
             throw new Exception("권한없음");
         }
-        long start = System.currentTimeMillis();
-        try {
-//            Set<CfrData> cfrList = usersService.findCfrAll(id);
-            List<CfrData> cfrList = cfrDataRepository.findByUsersId_IdOrderByCreateDateDesc(id);
-            model.addAttribute("cfrDataSet", cfrList);
-            return "cfr/list";
-        } finally {
-            long finish = System.currentTimeMillis();
-            long timeMs = finish - start;
-            System.out.println("getCfrList 시간 : " + timeMs + "ms");
-        }
+//        long start = System.currentTimeMillis();
+//        try {
+////            Set<CfrData> cfrList = usersService.findCfrAll(id);
+//            List<CfrData> cfrList = cfrDataRepository.findByUsersId_IdOrderByCreateDateDesc(id);
+//            model.addAttribute("cfrDataSet", cfrList);
+//            return "cfr/list";
+//        } finally {
+//            long finish = System.currentTimeMillis();
+//            long timeMs = finish - start;
+//            System.out.println("getCfrList 시간 : " + timeMs + "ms");
+//        }
+        List<CfrData> cfrList = cfrDataRepository.findByUsersId_IdOrderByCreateDateDesc(id);
+        model.addAttribute("cfrDataSet", cfrList);
+        return "cfr/list";
     }
 
     @GetMapping("/board")

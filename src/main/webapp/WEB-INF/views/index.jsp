@@ -4,143 +4,147 @@
 
 <div class="main_wrap">
 
-    <c:if test="${not empty boardView}">
-        <div class="container-fluid">
-          <button class="btn btn-secondary" onclick="location.href='/'">목록</button>
-          <c:if test="${boardView.users.id == principal.users.id}">
-            <a href="/board/${boardView.id}/updateForm" class="btn btn-warning">수정</a>
-            <button id="btn-delete" class="btn btn-danger">삭제</button>
-          </c:if>
-          <br/><br/>
-          <div>
-            작성자:<span><i>${boardView.users.username}</i>&nbsp;&nbsp;&nbsp;</span>
-            글 번호:<span id="id"><i>${boardView.id}</i></span>
-          </div>
-          <br/>
-          <div>
-            <h3>${boardView.title}</h3>
-          </div>
-          <hr>
-          <div>
-            <div>${boardView.content}</div>
-          </div>
-            <c:if test="${not empty principal}">
-                <div class="card-body">
-                    <div class="row">
-                      <div class="form-group col-sm-8">
-                        <input class="form-control input-sm" id="comment" type="text" placeholder="댓글 입력...">
-                      </div>
-                      <div class="form-group col-sm-2">
-                        <button type="button" class="btn btn-primary" id="btn-replySave">
-                            저장
-                        </button>
-                      </div>
-                    </div>
-                </div>
-            </c:if>
-            <c:forEach var="reply" items="${replyList}">
-                <div style="display:flex;margin-top:10px;margin-left:${reply.id*10}px" name="comment_${reply.id}">
-                    <span style="width:130px;">${reply.comment} &nbsp;</span>
-                    <button type="button" onclick="newHello(${reply.id})" class="replyButton${reply.id}">버튼</button>
-                </div>
-            </c:forEach>
-        </div>
-    </c:if>
+    <article>
 
-    <c:if test="${not empty boards}">
-        <section class="content">
+        <c:if test="${not empty boardView}">
             <div class="container-fluid">
-
-                <div class="list_wrap">
-                  <div class="list-group cus-list">
-                    <div class="list-group-item align-items-center list-head">
-                        <div class="row-top">
-                            <div class="col-title">제목</div>
-                        </div>
-                        <div class="d-flex justify-content-between row-bottom">
-                            <div class="col-author">작성자</div>
-                            <div class="col-time">작성일</div>
-                            <div class="col-view">조회수</div>
-                            <div class="col-good">추천</div>
+              <button class="btn btn-secondary" onclick="location.href='/'">목록</button>
+              <c:if test="${boardView.users.id == principal.users.id}">
+                <a href="/board/${boardView.id}/updateForm" class="btn btn-warning">수정</a>
+                <button id="btn-delete" class="btn btn-danger">삭제</button>
+              </c:if>
+              <br/><br/>
+              <div>
+                작성자:<span><i>${boardView.users.username}</i>&nbsp;&nbsp;&nbsp;</span>
+                글 번호:<span id="id"><i>${boardView.id}</i></span>
+              </div>
+              <br/>
+              <div>
+                <h3>${boardView.title}</h3>
+              </div>
+              <hr>
+              <div>
+                <div>${boardView.content}</div>
+              </div>
+                <c:if test="${not empty principal}">
+                    <div class="card-body">
+                        <div class="row">
+                          <div class="form-group col-sm-8">
+                            <input class="form-control input-sm" id="comment" type="text" placeholder="댓글 입력...">
+                          </div>
+                          <div class="form-group col-sm-2">
+                            <button type="button" class="btn btn-primary" id="btn-replySave">
+                                저장
+                            </button>
+                          </div>
                         </div>
                     </div>
-                    <c:forEach var="board" items="${boards.content}">
-                        <div class="cusHov list-body">
-                          <a class="list-bodyInner" href="/${board.id}${state}page=${boards.number+1}">
+                </c:if>
+                <c:forEach var="reply" items="${replyList}">
+                    <div style="display:flex;margin-top:10px;margin-left:${reply.id*10}px" name="comment_${reply.id}">
+                        <span style="width:130px;">${reply.comment} &nbsp;</span>
+                        <button type="button" onclick="newHello(${reply.id})" class="replyButton${reply.id}">버튼</button>
+                    </div>
+                </c:forEach>
+            </div>
+        </c:if>
+
+        <c:if test="${not empty boards}">
+            <section class="content">
+                <div class="container-fluid">
+
+                    <div class="list_wrap">
+                      <div class="list-group cus-list">
+                        <div class="list-group-item align-items-center list-head">
                             <div class="row-top">
-                                <div class="col-title">${board.title}</div>
+                                <div class="col-title">제목</div>
                             </div>
-                            <div class="row-bottom">
-                                <div class="col-author">${board.users.username}</div>
-                                <div class="row-bottom-rightInner">
-                                    <div class="col-time">${board.createDate.substring(11, 16)}</div>
-                                    <div class="col-view">${board.viewCount}</div>
-                                    <div class="col-good">0</div>
-                                </div>
+                            <div class="d-flex justify-content-between row-bottom">
+                                <div class="col-author">작성자</div>
+                                <div class="col-time">작성일</div>
+                                <div class="col-view">조회수</div>
+                                <div class="col-good">추천</div>
                             </div>
-                          </a>
                         </div>
-                    </c:forEach>
-
-                  </div>
-                </div>
-
-                <ul class="pagination justify-content-center">
-                  <c:choose>
-                    <c:when test="${boards.first}">
-                        <li class="page-item disabled"><a class="page-link" href="${state}page=${boards.number}"><</a></li>
-                    </c:when>
-                    <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="${state}page=${boards.number}"><</a></li>
-                    </c:otherwise>
-                  </c:choose>
-                  <c:forEach var="cnt" begin="1" end="${boards.totalPages}">
-                    <c:choose>
-                      <c:when test="${boards.number == cnt-1}">
-                        <li class="page-item active"><a class="page-link" href="${state}page=${cnt}">${cnt}</a></li>
-                      </c:when>
-                      <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="${state}page=${cnt}">${cnt}</a></li>
-                      </c:otherwise>
-                    </c:choose>
-                  </c:forEach>
-                  <c:choose>
-                    <c:when test="${boards.last}">
-                        <li class="page-item disabled"><a class="page-link" href="${state}page=${boards.number+2}">></a></li>
-                    </c:when>
-                    <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="${state}page=${boards.number+2}">></a></li>
-                    </c:otherwise>
-                  </c:choose>
-                </ul>
-
-                <div class="pagination-wrapper">
-                    <ul class="pagination justify-content-center">
-                        <c:forEach var="cnt" begin="1" end="${boards.totalPages}">
-                            <li class="page-item">
-                                <a class="page-link" href="/b/hkstarrail?p=1">${cnt}</a>
-                            </li>
+                        <c:forEach var="board" items="${boards.content}">
+                            <div class="cusHov list-body">
+                              <a class="list-bodyInner" href="/${board.id}${state}page=${boards.number+1}">
+                                <div class="row-top">
+                                    <div class="col-title">${board.title}</div>
+                                </div>
+                                <div class="row-bottom">
+                                    <div class="col-author">${board.users.username}</div>
+                                    <div class="row-bottom-rightInner">
+                                        <div class="col-time">${board.createDate.substring(11, 16)}</div>
+                                        <div class="col-view">${board.viewCount}</div>
+                                        <div class="col-good">0</div>
+                                    </div>
+                                </div>
+                              </a>
+                            </div>
                         </c:forEach>
+
+                      </div>
+                    </div>
+
+                    <ul class="pagination justify-content-center">
+                      <c:choose>
+                        <c:when test="${boards.first}">
+                            <li class="page-item disabled"><a class="page-link" href="${state}page=${boards.number}"><</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item"><a class="page-link" href="${state}page=${boards.number}"><</a></li>
+                        </c:otherwise>
+                      </c:choose>
+                      <c:forEach var="cnt" begin="1" end="${boards.totalPages}">
+                        <c:choose>
+                          <c:when test="${boards.number == cnt-1}">
+                            <li class="page-item active"><a class="page-link" href="${state}page=${cnt}">${cnt}</a></li>
+                          </c:when>
+                          <c:otherwise>
+                            <li class="page-item"><a class="page-link" href="${state}page=${cnt}">${cnt}</a></li>
+                          </c:otherwise>
+                        </c:choose>
+                      </c:forEach>
+                      <c:choose>
+                        <c:when test="${boards.last}">
+                            <li class="page-item disabled"><a class="page-link" href="${state}page=${boards.number+2}">></a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item"><a class="page-link" href="${state}page=${boards.number+2}">></a></li>
+                        </c:otherwise>
+                      </c:choose>
                     </ul>
+
+                    <div class="pagination-wrapper">
+                        <ul class="pagination justify-content-center">
+                            <c:forEach var="cnt" begin="1" end="${boards.totalPages}">
+                                <li class="page-item">
+                                    <a class="page-link" href="/b/hkstarrail?p=1">${cnt}</a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+
                 </div>
 
-            </div>
 
+                <div class="searchBox">
+                    <select id="searchKeyword">
+                        <option value="title">제목</option>
+                        <option value="writer">작성자</option>
+                    </select>
+                    <input class="searchInput" id="searchInput" type="text" />
+                    <button class="searchButton" type="button" onclick="boardSearch()">
+                        <img class="image-thumb" src="https://media.istockphoto.com/id/1167683205/ko/%EB%B2%A1%ED%84%B0/%EA%B2%80%EC%83%89-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=zFYCQOhkQmFkjFOz8B0SnZpwnDv_M_n1D2jgrfzkLfk=">
+                    </button>
 
-            <div class="searchBox">
-                <select id="searchKeyword">
-                    <option value="title">제목</option>
-                    <option value="writer">작성자</option>
-                </select>
-                <input class="searchInput" id="searchInput" type="text" />
-                <button class="searchButton" type="button" onclick="boardSearch()">
-                    <img class="image-thumb" src="https://media.istockphoto.com/id/1167683205/ko/%EB%B2%A1%ED%84%B0/%EA%B2%80%EC%83%89-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?s=612x612&w=0&k=20&c=zFYCQOhkQmFkjFOz8B0SnZpwnDv_M_n1D2jgrfzkLfk=">
-                </button>
+                </div>
 
-            </div>
+            </section>
+        </c:if>
 
-        </section>
-    </c:if>
+    </article>
 
         <aside class="main_aside">
             <div class="container-fluid">
