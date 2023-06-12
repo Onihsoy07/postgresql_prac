@@ -1,6 +1,7 @@
 package com.test.postgresql_test.config;
 
 import com.test.postgresql_test.config.auth.PrincipalDetailsService;
+import com.test.postgresql_test.handler.CustomAuthSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .loginProcessingUrl("/auth/loginProc")
-//                .successHandler(null)
+                .successHandler(new CustomAuthSuccessHandler())
                 .and()
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/");
     }

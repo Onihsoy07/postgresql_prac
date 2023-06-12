@@ -87,7 +87,16 @@ public class IndexController {
     }
 
     @GetMapping("/auth/login")
-    public String login() {
+    public String login(HttpServletRequest request) {
+        String referer = request.getHeader("Referer");
+        String host = request.getHeader("Host");
+
+        if (referer == null || referer.contains("/auth") || !referer.contains(host)) {
+            referer = "/";
+        }
+
+        request.getSession().setAttribute("prePage", referer);
+
         return "user/login";
     }
 

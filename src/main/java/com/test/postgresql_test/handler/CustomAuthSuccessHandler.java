@@ -16,7 +16,6 @@ import java.io.IOException;
 @Component
 public class CustomAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private final RequestCache requestCache = new HttpSessionRequestCache();
     private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
 
@@ -31,4 +30,6 @@ public class CustomAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         redirectStrategy.sendRedirect(request, response, prePage);
 
     }
+
+
 }

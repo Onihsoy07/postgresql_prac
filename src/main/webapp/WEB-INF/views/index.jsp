@@ -26,20 +26,27 @@
               <div>
                 <div>${boardView.content}</div>
               </div>
-                <c:if test="${not empty principal}">
-                    <div class="card-body">
-                        <div class="row">
-                          <div class="form-group col-sm-8">
-                            <input class="form-control input-sm" id="comment" type="text" placeholder="댓글 입력...">
-                          </div>
-                          <div class="form-group col-sm-2">
-                            <button type="button" class="btn btn-primary" id="btn-replySave">
-                                저장
-                            </button>
-                          </div>
+                <c:choose>
+                    <c:when test="${not empty principal}">
+                        <div class="card-body">
+                            <div class="row">
+                              <div class="form-group col-sm-8">
+                                <input class="form-control input-sm" id="comment" type="text" placeholder="댓글 입력...">
+                              </div>
+                              <div class="form-group col-sm-2">
+                                <button type="button" class="btn btn-primary" id="btn-replySave">
+                                    저장
+                                </button>
+                              </div>
+                            </div>
                         </div>
-                    </div>
-                </c:if>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="card-body" style="border: 1px solid;">
+                            <a href="/auth/login">댓글을 쓰려면 로그인 하시오.</a>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
                 <c:forEach var="reply" items="${replyList}">
                     <div style="display:flex;margin-top:10px;margin-left:${reply.id*10}px" name="comment_${reply.id}">
                         <span style="width:130px;">${reply.comment} &nbsp;</span>
