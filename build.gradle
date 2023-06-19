@@ -33,10 +33,13 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
 	testImplementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
-	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
-	implementation 'javax.servlet:jstl'
+//	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+//	implementation 'javax.servlet:jstl'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	implementation 'org.springframework.security:spring-security-taglibs'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 }
 
 tasks.named('test') {

@@ -72,7 +72,7 @@ public class NaverCFRServiceImpl implements NaverCFRService {
         );
 
         ObjectMapper mapper = new ObjectMapper();
-        CfrResponseDto cfrResponseDto = null;
+        CfrResponseDto cfrResponseDto;
         try {
             cfrResponseDto = mapper.readValue(response.getBody(), CfrResponseDto.class);
         } catch (JsonProcessingException e) {

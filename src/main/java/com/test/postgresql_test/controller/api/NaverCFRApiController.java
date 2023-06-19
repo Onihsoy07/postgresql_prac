@@ -21,8 +21,6 @@ public class NaverCFRApiController {
 
     private final NaverCFRService naverCFRService;
 
-    private final UsersService usersService;
-
     @PostMapping("/test/cfr")
     public ResponseEntity<CfrResponseDto> getCRF(@RequestParam("image") MultipartFile multipartFile,
                                                  @AuthenticationPrincipal final PrincipalDetails principal) throws Exception {
@@ -30,11 +28,5 @@ public class NaverCFRApiController {
         naverCFRService.save(cfrResponseDto, principal.getUsers());
         return ResponseEntity.status(HttpStatus.OK).body(cfrResponseDto);
     }
-
-//    @GetMapping("/test")
-//    public ResponseEntity<Integer> tt() {
-//        System.out.println("hello");
-//        return ResponseEntity.status(HttpStatus.OK).body(1234);
-//    }
 
 }
