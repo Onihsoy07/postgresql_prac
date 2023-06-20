@@ -25,7 +25,7 @@
 
 
 </head>
-<body>
+<body th:with="principal=${#authentication.principal}">
 
 <div class="jumbotron text-center" style="margin-bottom:0">
     <h1>My Page</h1>
@@ -38,7 +38,7 @@
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
 
-        <ul class="navbar-nav" th:if="${#authentication.principal}==anonymousUser">
+        <ul class="navbar-nav" th:if="${principal}==anonymousUser">
 <!--            <c:when test="${empty principal}">-->
                 <li class="nav-item">
                     <a class="nav-link"
@@ -52,7 +52,7 @@
                 </li>
         </ul>
 
-        <ul class="navbar-nav" th:unless="${#authentication.principal}==anonymousUser">
+        <ul class="navbar-nav" th:unless="${principal}==anonymousUser">
             <li class="nav-item dropdown">
             <li class="nav-item">
                 <a class="nav-link" href="/cfr">연예인 얼굴</a>
@@ -60,7 +60,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/board">글쓰기</a>
             </li>
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" th:text="${#authentication.principal.users.username}">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" th:text="${principal.users.username}">
                     hello
             </a>
             <div class="dropdown-menu">
