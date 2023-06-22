@@ -19,59 +19,10 @@
     <script th:src="@{https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js}"
             src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
-<!--    <sec:authorize access="isAuthenticated()">-->
-<!--        <sec:authentication property="principal" var="principal"/>-->
-<!--    </sec:authorize>-->
-
-
 </head>
 <body th:with="principal=${#authentication.principal}">
 
-<div class="jumbotron text-center" style="margin-bottom:0">
-    <h1>My Page</h1>
-</div>
-
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a class="navbar-brand" href="/">HOME</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-
-        <ul class="navbar-nav" th:if="${principal}==anonymousUser">
-<!--            <c:when test="${empty principal}">-->
-                <li class="nav-item">
-                    <a class="nav-link"
-                       th:href="@{/auth/login}"
-                       href="/auth/login">로그인</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       th:href="@{/auth/join}"
-                       href="/auth/join">회원가입</a>
-                </li>
-        </ul>
-
-        <ul class="navbar-nav" th:unless="${principal}==anonymousUser">
-            <li class="nav-item dropdown">
-            <li class="nav-item">
-                <a class="nav-link" href="/cfr">연예인 얼굴</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/board">글쓰기</a>
-            </li>
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" th:text="${principal.users.username}">
-                    hello
-            </a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="/user/detail">회원 정보</a>
-                <a class="dropdown-item" href="/cfr/${principal.users.id}">cfr 리스트</a>
-                <a class="dropdown-item" href="/logout">로그아웃</a>
-            </div>
-            </li>
-        </ul>
-    </div>
-</nav>
+<th:block th:replace="~{layout/nav :: nav}"/>
 
 <div class="main_wrap">
 
@@ -79,25 +30,30 @@
         <article>
 
 <!--&lt;!&ndash;            <c:if test="${not empty boardView}">&ndash;&gt;-->
-<!--                <div class="container-fluid" th:if="${boardView!=null}">-->
-<!--                  <button class="btn btn-secondary" onclick="location.href='/'">목록</button>-->
-<!--&lt;!&ndash;                  <c:if test="${boardView.users.id == principal.users.id}">&ndash;&gt;-->
-<!--                    <a href="/board/${boardView.id}/updateForm" class="btn btn-warning" th:if="${boardView.users.id == #authentication.principal.users.id}">수정</a>-->
-<!--                    <button id="btn-delete" class="btn btn-danger" th:if="${boardView.users.id == #authentication.principal.users.id}">삭제</button>-->
-<!--&lt;!&ndash;                  </c:if>&ndash;&gt;-->
-<!--                  <br/><br/>-->
-<!--                  <div>-->
-<!--                    작성자:<span><i th:text="${boardView.users.username}">${boardView.users.username}</i>&nbsp;&nbsp;&nbsp;</span>-->
-<!--                    글 번호:<span id="id"><i th:text="${boardView.users.id}">${boardView.id}</i></span>-->
-<!--                  </div>-->
-<!--                  <br/>-->
-<!--                  <div>-->
-<!--                    <h3 th:text="${boardView.title}">${boardView.title}</h3>-->
-<!--                  </div>-->
-<!--                  <hr>-->
-<!--                  <div>-->
-<!--                    <div th:text="${boardView.content}">${boardView.content}</div>-->
-<!--                  </div>-->
+                <div class="container-fluid" th:if="${boardView!=null}">
+                  <button class="btn btn-secondary" onclick="location.href='/'">목록</button>
+<!--                    <h1>board=[[${boardView.users.id}]]</h1>-->
+<!--                    <h1>principal=[[${principal.users.id}]]</h1>-->
+<!--                  <c:if test="${boardView.users.id == principal.users.id}">-->
+                    <a href="/board/${boardView.id}/updateForm" class="btn btn-warning" th:if="${principal == anonymousUser ||(boardView.users.id == principal.users.id)}">수정</a>
+                    <button id="btn-delete" class="btn btn-danger" th:if="${principal == anonymousUser ||(boardView.users.id == principal.users.id)}">삭제</button>
+<!--                    <p th:text="${boardView.users.id}"></p>-->
+<!--                    <p th:text="${principal.users.id}"></p>-->
+<!--                  </c:if>-->
+                  <br/><br/>
+                  <div>
+                      작성자:<span><i>[[${boardView.users.username}]]</i>&nbsp;&nbsp;&nbsp;</span>
+                      글 번호:<span id="id"><i>[[${boardView.id}]]</i>&nbsp;&nbsp;&nbsp;</span>
+                      작성 일자:<span><i th:text="${boardView.createDate}"></i></span>
+                  </div>
+                  <br/>
+                  <div>
+                    <h3 th:text="${boardView.title}">title</h3>
+                  </div>
+                  <hr>
+                  <div>
+                    <div th:utext="${boardView.content}">content</div>
+                  </div>
 <!--                    <c:choose>-->
 <!--                        <c:when test="${not empty principal}">-->
 <!--                            <div class="card-body">-->
@@ -197,15 +153,19 @@
 <!--                          </c:choose>-->
 <!--                        </ul>-->
 
-<!--                        <div class="pagination-wrapper">-->
-<!--                            <ul class="pagination justify-content-center">-->
-<!--                                <c:forEach var="cnt" begin="1" end="${boards.totalPages}">-->
-<!--                                    <li class="page-item">-->
-<!--                                        <a class="page-link" href="/b/hkstarrail?p=1">${cnt}</a>-->
-<!--                                    </li>-->
-<!--                                </c:forEach>-->
-<!--                            </ul>-->
-<!--                        </div>-->
+                        <div class="pagination-wrapper">
+                            <ul class="pagination justify-content-center">
+                                <th:block th:each="page : ${#numbers.sequence(1, boards.totalPages)}">
+                                    <!--                                <c:forEach var="cnt" begin="1" end="${boards.totalPages}">-->
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                           th:href="@{{state}(state=${state}, page=${page})}"
+                                           href="/b/hkstarrail?p=1">[[${page}]]</a>
+                                    </li>
+                                    <!--                                </c:forEach>-->
+                                </th:block>
+                            </ul>
+                        </div>
 
                     </div>
 
@@ -244,11 +204,13 @@
 
 </div>
 
+<th:block th:replace="layout/footer :: footer"/>
 
 
 
-<!--    <script src="/js/reply.js"></script>-->
-<!--    <script src="/js/board.js"></script>-->
+
+    <script src="/js/reply.js"></script>
+    <script src="/js/board.js"></script>
     <link rel="stylesheet" href="/css/main.css" />
 
 </body>

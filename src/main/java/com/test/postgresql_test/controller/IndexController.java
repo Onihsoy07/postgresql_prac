@@ -49,7 +49,7 @@ public class IndexController {
                             HttpServletRequest request,
                             HttpServletResponse response) {
         response = boardService.viewCount(id, request, response);
-        model.addAttribute("state", "/?");
+        model.addAttribute("state", "/");
         model.addAttribute("replyList", replyRepository.findByBoard_IdOrderByCreateDateAsc(id));
         model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
         model.addAttribute("boardView", boardService.findById(id));

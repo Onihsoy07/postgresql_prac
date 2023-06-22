@@ -71,12 +71,15 @@ public class BoardService {
     public HttpServletResponse viewCount(Long boardId, HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
         Cookie thisCookie = null;
-        for (Cookie cookie : cookies) {
-            if ("viewBoardList".equals(cookie.getName())) {
-                thisCookie = cookie;
-                break;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("viewBoardList".equals(cookie.getName())) {
+                    thisCookie = cookie;
+                    break;
+                }
             }
         }
+
         if (thisCookie == null) {
             thisCookie = new Cookie("viewBoardList", String.format("_%d_", boardId));
             thisCookie.setMaxAge(calcEndSec());
