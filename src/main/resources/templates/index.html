@@ -180,7 +180,7 @@
                                 <th:block th:each="page : ${#numbers.sequence(1, boards.totalPages)}">
                                     <li class="page-item">
                                         <a class="page-link"
-                                           th:href="@{{state}(state=${state}, page=${page})}"
+                                           th:href="@{/{state}(state=${state}, page=${page})}"
                                            href="/b/hkstarrail?p=1">[[${page}]]</a>
                                     </li>
                                 </th:block>
