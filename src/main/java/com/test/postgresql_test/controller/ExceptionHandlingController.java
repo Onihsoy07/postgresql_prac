@@ -12,8 +12,8 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
-@Controller
-public class ExceptionHandlingController implements ErrorController {
+//@Controller
+public class ExceptionHandlingController /**implements ErrorController*/ {
 
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 

@@ -36,7 +36,7 @@ public class IndexController {
     @GetMapping({"/",""})
     public String index(Model model,
                         @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        model.addAttribute("state", "/?");
+        model.addAttribute("state", "");
         model.addAttribute("boards", boardService.boardList(cusPageable(pageable)));
         model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
         return "index";
@@ -48,8 +48,8 @@ public class IndexController {
                             @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
                             HttpServletRequest request,
                             HttpServletResponse response) {
-        response = boardService.viewCount(id, request, response);
-        model.addAttribute("state", "/");
+//        response = boardService.viewCount(id, request, response);
+        model.addAttribute("state", "");
         model.addAttribute("replyList", replyRepository.findByBoard_IdOrderByCreateDateAsc(id));
         model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
         model.addAttribute("boardView", boardService.findById(id));

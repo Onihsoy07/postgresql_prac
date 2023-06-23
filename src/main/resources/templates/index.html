@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="kr"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>My Page</title>
     <meta charset="utf-8">
@@ -28,63 +27,86 @@
 
 
         <article>
-
-<!--&lt;!&ndash;            <c:if test="${not empty boardView}">&ndash;&gt;-->
+<!--/*
                 <div class="container-fluid" th:if="${boardView!=null}">
-                  <button class="btn btn-secondary" onclick="location.href='/'">목록</button>
-<!--                    <h1>board=[[${boardView.users.id}]]</h1>-->
-<!--                    <h1>principal=[[${principal.users.id}]]</h1>-->
-<!--                  <c:if test="${boardView.users.id == principal.users.id}">-->
-                    <a href="/board/${boardView.id}/updateForm" class="btn btn-warning" th:if="${principal == anonymousUser ||(boardView.users.id == principal.users.id)}">수정</a>
-                    <button id="btn-delete" class="btn btn-danger" th:if="${principal == anonymousUser ||(boardView.users.id == principal.users.id)}">삭제</button>
-<!--                    <p th:text="${boardView.users.id}"></p>-->
-<!--                    <p th:text="${principal.users.id}"></p>-->
-<!--                  </c:if>-->
-                  <br/><br/>
-                  <div>
-                      작성자:<span><i>[[${boardView.users.username}]]</i>&nbsp;&nbsp;&nbsp;</span>
-                      글 번호:<span id="id"><i>[[${boardView.id}]]</i>&nbsp;&nbsp;&nbsp;</span>
-                      작성 일자:<span><i th:text="${boardView.createDate}"></i></span>
-                  </div>
-                  <br/>
-                  <div>
-                    <h3 th:text="${boardView.title}">title</h3>
-                  </div>
-                  <hr>
-                  <div>
-                    <div th:utext="${boardView.content}">content</div>
-                  </div>
-<!--                    <c:choose>-->
-<!--                        <c:when test="${not empty principal}">-->
-<!--                            <div class="card-body">-->
-<!--                                <div class="row">-->
-<!--                                  <div class="form-group col-sm-8">-->
-<!--                                    <input class="form-control input-sm" id="comment" type="text" placeholder="댓글 입력...">-->
-<!--                                  </div>-->
-<!--                                  <div class="form-group col-sm-2">-->
-<!--                                    <button type="button" class="btn btn-primary" id="btn-replySave">-->
-<!--                                        저장-->
-<!--                                    </button>-->
-<!--                                  </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </c:when>-->
-<!--                        <c:otherwise>-->
-<!--                            <div class="card-body" style="border: 1px solid;">-->
-<!--                                <a href="/auth/login">댓글을 쓰려면 로그인 하시오.</a>-->
-<!--                            </div>-->
-<!--                        </c:otherwise>-->
-<!--                    </c:choose>-->
-<!--                    <c:forEach var="reply" items="${replyList}">-->
-<!--                        <div style="display:flex;margin-top:10px;margin-left:${reply.id*10}px" name="comment_${reply.id}">-->
-<!--                            <span style="width:130px;">${reply.comment} &nbsp;</span>-->
-<!--                            <button type="button" onclick="newHello(${reply.id})" class="replyButton${reply.id}">버튼</button>-->
-<!--                        </div>-->
-<!--                    </c:forEach>-->
-                </div>
-<!--            </c:if>-->
+                    <button class="btn btn-secondary" onclick="location.href='/'">목록</button>
+                    <h1>board=[[${boardView.users.id}]]</h1>
+                                <h1>principal=[[${principal.users.id}]]</h1>
+            <th:block th:if="${principal == anonymousUser || boardView.users.id == principal.users.id}">
+                <a href="/board/${boardView.id}/updateForm" class="btn btn-warning">수정</a>
+                <button id="btn-delete" class="btn btn-danger">삭제</button>
+            </th:block>
 
-<!--            <c:if test="${not empty boards}">-->
+                                <p th:text="${boardView.users.id}"></p>
+                                <p th:text="${principal.users.id}"></p>
+                <br/><br/>
+                <div>
+                    작성자:<span><i>[[${boardView.users.username}]]</i>&nbsp;&nbsp;&nbsp;</span>
+                    글 번호:<span id="id"><i>[[${boardView.id}]]</i>&nbsp;&nbsp;&nbsp;</span>
+                    작성 일자:<span><i th:text="${boardView.createDate}"></i></span>
+                </div>
+                <br/>
+                <div>
+                    <h3 th:text="${boardView.title}">title</h3>
+                </div>
+                <hr>
+                <div>
+                    <div th:utext="${boardView.content}">content</div>
+                </div>
+            </div>
+                                <c:choose>
+                                    <c:when test="${not empty principal}">
+                                        <div class="card-body">
+                                            <div class="row">
+                                              <div class="form-group col-sm-8">
+                                                <input class="form-control input-sm" id="comment" type="text" placeholder="댓글 입력...">
+                                              </div>
+                                              <div class="form-group col-sm-2">
+                                                <button type="button" class="btn btn-primary" id="btn-replySave">
+                                                    저장
+                                                </button>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="card-body" style="border: 1px solid;">
+                                            <a href="/auth/login">댓글을 쓰려면 로그인 하시오.</a>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:forEach var="reply" items="${replyList}">
+                                    <div style="display:flex;margin-top:10px;margin-left:${reply.id*10}px" name="comment_${reply.id}">
+                                        <span style="width:130px;">${reply.comment} &nbsp;</span>
+                                        <button type="button" onclick="newHello(${reply.id})" class="replyButton${reply.id}">버튼</button>
+                                    </div>
+                                </c:forEach>
+</div>
+*/-->
+
+            <div class="container-fluid" th:if="${boardView!=null}">
+                <button class="btn btn-secondary" onclick="location.href='/'">목록</button>
+                <th:block th:if="${principal} != anonymousUser and ${boardView.users.id} == ${principal.users.id}">
+                    <a href="/board/${boardView.id}/updateForm" class="btn btn-warning">수정</a>
+                    <button id="btn-delete" class="btn btn-danger">삭제</button>
+                </th:block>
+                <br/><br/>
+                <div>
+                    작성자:<span><i>[[${boardView.users.username}]]</i>&nbsp;&nbsp;&nbsp;</span>
+                    글 번호:<span id="id"><i>[[${boardView.id}]]</i>&nbsp;&nbsp;&nbsp;</span>
+                    작성 일자:<span><i th:text="${boardView.createDate}"></i></span>
+                </div>
+                <br/>
+                <div>
+                    <h3 th:text="${boardView.title}">title</h3>
+                </div>
+                <hr>
+                <div>
+                    <div th:utext="${boardView.content}">content</div>
+                </div>
+            </div>
+
+
                 <section class="content">
                     <div class="container-fluid">
 
@@ -101,10 +123,9 @@
                                     <div class="col-good">추천</div>
                                 </div>
                             </div>
-<!--                            <c:forEach var="board" items="${boards.content}">-->
                                 <div class="cusHov list-body" th:each="board : ${boards.content}">
                                   <a class="list-bodyInner"
-                                     th:href="@{|/${board.id}${state}page=${boards.number+1}|}"
+                                     th:href="@{/{boardId}/{state}(boardId=${board.id}, state=${state}, page=${boards.number+1})}"
                                      href="/${board.id}${state}page=${boards.number+1}">
                                     <div class="row-top">
                                         <div class="col-title" th:text="${board.title}">${board.title}</div>
@@ -119,50 +140,49 @@
                                     </div>
                                   </a>
                                 </div>
-<!--                            </c:forEach>-->
-
                           </div>
                         </div>
 
-<!--                        <ul class="pagination justify-content-center">-->
-<!--                          <c:choose>-->
-<!--                            <c:when test="${boards.first}">-->
-<!--                                <li class="page-item disabled"><a class="page-link" href="${state}page=${boards.number}"><</a></li>-->
-<!--                            </c:when>-->
-<!--                            <c:otherwise>-->
-<!--                                <li class="page-item"><a class="page-link" href="${state}page=${boards.number}"><</a></li>-->
-<!--                            </c:otherwise>-->
-<!--                          </c:choose>-->
-<!--                          <c:forEach var="cnt" begin="1" end="${boards.totalPages}">-->
-<!--                            <c:choose>-->
-<!--                              <c:when test="${boards.number == cnt-1}">-->
-<!--                                <li class="page-item active"><a class="page-link" href="${state}page=${cnt}">${cnt}</a></li>-->
-<!--                              </c:when>-->
-<!--                              <c:otherwise>-->
-<!--                                <li class="page-item"><a class="page-link" href="${state}page=${cnt}">${cnt}</a></li>-->
-<!--                              </c:otherwise>-->
-<!--                            </c:choose>-->
-<!--                          </c:forEach>-->
-<!--                          <c:choose>-->
-<!--                            <c:when test="${boards.last}">-->
-<!--                                <li class="page-item disabled"><a class="page-link" href="${state}page=${boards.number+2}">></a></li>-->
-<!--                            </c:when>-->
-<!--                            <c:otherwise>-->
-<!--                                <li class="page-item"><a class="page-link" href="${state}page=${boards.number+2}">></a></li>-->
-<!--                            </c:otherwise>-->
-<!--                          </c:choose>-->
-<!--                        </ul>-->
+<!--/*
+                        <ul class="pagination justify-content-center">
+                          <c:choose>
+                            <c:when test="${boards.first}">
+                                <li class="page-item disabled"><a class="page-link" href="${state}page=${boards.number}"><</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item"><a class="page-link" href="${state}page=${boards.number}"><</a></li>
+                            </c:otherwise>
+                          </c:choose>
+                          <c:forEach var="cnt" begin="1" end="${boards.totalPages}">
+                            <c:choose>
+                              <c:when test="${boards.number == cnt-1}">
+                                <li class="page-item active"><a class="page-link" href="${state}page=${cnt}">${cnt}</a></li>
+                              </c:when>
+                              <c:otherwise>
+                                <li class="page-item"><a class="page-link" href="${state}page=${cnt}">${cnt}</a></li>
+                              </c:otherwise>
+                            </c:choose>
+                          </c:forEach>
+                          <c:choose>
+                            <c:when test="${boards.last}">
+                                <li class="page-item disabled"><a class="page-link" href="${state}page=${boards.number+2}">></a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item"><a class="page-link" href="${state}page=${boards.number+2}">></a></li>
+                            </c:otherwise>
+                          </c:choose>
+                        </ul>
+*/-->
+
 
                         <div class="pagination-wrapper">
                             <ul class="pagination justify-content-center">
                                 <th:block th:each="page : ${#numbers.sequence(1, boards.totalPages)}">
-                                    <!--                                <c:forEach var="cnt" begin="1" end="${boards.totalPages}">-->
                                     <li class="page-item">
                                         <a class="page-link"
                                            th:href="@{{state}(state=${state}, page=${page})}"
                                            href="/b/hkstarrail?p=1">[[${page}]]</a>
                                     </li>
-                                    <!--                                </c:forEach>-->
                                 </th:block>
                             </ul>
                         </div>
@@ -183,20 +203,17 @@
                     </div>
 
                 </section>
-<!--            </c:if>-->
 
         </article>
 
             <aside class="main_aside">
                 <div class="container-fluid">
                   <ul class="list-group" th:each="cfr : ${topRateCfr}">
-<!--                    <:forEach var="cfr" items="${topRateCfr}">-->
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                           <a href="#" th:text="${cfr.value}">cfr.value</a>
                           <p th:text="${cfr.confidence}">cfr.confidence</p>
                           <span class="badge badge-primary badge-pill" th:text="${cfr.users.username}">cfr.users.username</span>
                         </li>
-<!--                    </:forEach>-->
                   </ul>
                 </div>
             </aside>
