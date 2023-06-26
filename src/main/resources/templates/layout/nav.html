@@ -40,7 +40,9 @@
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="/user/detail">회원 정보</a>
-                    <a class="dropdown-item" href="/cfr/${principal.users.id}">cfr 리스트</a>
+                    <a class="dropdown-item"
+                       th:href="@{/cfr/{userId}(userId=${principal.users.id})}"
+                       href="/cfr/${principal.users.id}">cfr 리스트</a>
                     <a class="dropdown-item" href="/logout">로그아웃</a>
                 </div>
                 </li>

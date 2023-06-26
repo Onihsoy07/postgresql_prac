@@ -81,12 +81,12 @@
                                         <button type="button" onclick="newHello(${reply.id})" class="replyButton${reply.id}">버튼</button>
                                     </div>
                                 </c:forEach>
-</div>
+</div> != anonymousUser
 */-->
 
             <div class="container-fluid" th:if="${boardView!=null}">
                 <button class="btn btn-secondary" onclick="location.href='/'">목록</button>
-                <th:block th:if="${principal} != anonymousUser and ${boardView.users.id} == ${principal.users.id}">
+                <th:block th:if="${principal} != anonymousUser and ${boardView.users.id} == ${principal?.users.id}">
                     <a href="/board/${boardView.id}/updateForm" class="btn btn-warning">수정</a>
                     <button id="btn-delete" class="btn btn-danger">삭제</button>
                 </th:block>
@@ -125,7 +125,7 @@
                             </div>
                                 <div class="cusHov list-body" th:each="board : ${boards.content}">
                                   <a class="list-bodyInner"
-                                     th:href="@{/{boardId}/{state}(boardId=${board.id}, state=${state}, page=${boards.number+1})}"
+                                     th:href="@{/{boardId}{state}page={page}(boardId=${board.id}, state=${state}, page=${boards.number+1})}"
                                      href="/${board.id}${state}page=${boards.number+1}">
                                     <div class="row-top">
                                         <div class="col-title" th:text="${board.title}">${board.title}</div>
@@ -180,8 +180,9 @@
                                 <th:block th:each="page : ${#numbers.sequence(1, boards.totalPages)}">
                                     <li class="page-item">
                                         <a class="page-link"
-                                           th:href="@{/{state}(state=${state}, page=${page})}"
-                                           href="/b/hkstarrail?p=1">[[${page}]]</a>
+                                           th:href="@{{state}page={page}(state=${state}, page=${page})}"
+                                           href="/b/hkstarrail?p=1"
+                                           th:text="${page}">page</a>
                                     </li>
                                 </th:block>
                             </ul>

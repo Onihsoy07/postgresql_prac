@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="kr"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/header :: header(~{::title})}">
+  <title>CFR List</title>
+</head>
+<body th:with="principal=${#authentication.principal}">
+
+  <th:block th:replace="~{layout/nav :: nav}"/>
+
+  <div style="height:1000px;margin:15px;">
+    <div class="container">
+      <h2>Basic Table</h2>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>이름</th>
+          <th>싱크로율</th>
+          <th>생성시간</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr th:each="cfrData : ${cfrDataSet}">
+            <td th:text="${cfrData.value}"></td>
+            <td th:text="${#numbers.formatPercent(cfrData.confidence,0,2)}"></td>
+            <td th:text="${cfrData.createDate}"></td>
+            <td><a type="button" class="badge" href="/board/${cfrData.id}">글쓰기</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <th:block th:replace="~{layout/footer :: footer}"/>
+
+<script src="/js/cfr.js"></script>
+<script src="/js/board.js"></script>
+
+</body>
+</html>
