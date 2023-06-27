@@ -68,13 +68,15 @@ public class BoardService {
     }
 
     @Transactional
-    public HttpServletResponse viewCount(Long boardId, HttpServletRequest request, HttpServletResponse response) {
+    public void viewCount(Long boardId, HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
         Cookie thisCookie = null;
-        for (Cookie cookie : cookies) {
-            if ("viewBoardList".equals(cookie.getName())) {
-                thisCookie = cookie;
-                break;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("viewBoardList".equals(cookie.getName())) {
+                    thisCookie = cookie;
+                    break;
+                }
             }
         }
 
@@ -84,14 +86,14 @@ public class BoardService {
             thisCookie.setPath("/");
             response.addCookie(thisCookie);
             addViewCount(boardId);
-            return response;
+//            return response;
         } else if (thisCookie.getValue().contains(String.format("_%d_", boardId))) {
-            return response;
+//            return response;
         } else {
             thisCookie.setValue(thisCookie.getValue() + String.format("%d_", boardId));
             response.addCookie(thisCookie);
             addViewCount(boardId);
-            return response;
+//            return response;
         }
     }
 

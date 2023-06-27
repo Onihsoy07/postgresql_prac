@@ -48,7 +48,7 @@ public class IndexController {
                             @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
                             HttpServletRequest request,
                             HttpServletResponse response) {
-//        response = boardService.viewCount(id, request, response);
+        boardService.viewCount(id, request, response);
         model.addAttribute("state", "/?");
         model.addAttribute("replyList", replyRepository.findByBoard_IdOrderByCreateDateAsc(id));
         model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
@@ -65,7 +65,7 @@ public class IndexController {
                                   @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
                                   HttpServletRequest request,
                                   HttpServletResponse response) {
-        response = boardService.viewCount(id, request, response);
+        boardService.viewCount(id, request, response);
         model.addAttribute("state", String.format("/search?target=%s&keyword=%s&", target, keyword));
         model.addAttribute("replyList", replyRepository.findByBoard_IdOrderByCreateDateAsc(id));
         model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
