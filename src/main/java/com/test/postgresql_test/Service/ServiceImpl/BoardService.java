@@ -82,19 +82,19 @@ public class BoardService {
 
         if (thisCookie == null) {
             thisCookie = new Cookie("viewBoardList", String.format("_%d_", boardId));
-            thisCookie.setMaxAge(calcEndSec());
-            thisCookie.setPath("/");
-            response.addCookie(thisCookie);
-            addViewCount(boardId);
-//            return response;
+            cookieSetAndViewCount(boardId, response, thisCookie);
         } else if (thisCookie.getValue().contains(String.format("_%d_", boardId))) {
-//            return response;
         } else {
             thisCookie.setValue(thisCookie.getValue() + String.format("%d_", boardId));
-            response.addCookie(thisCookie);
-            addViewCount(boardId);
-//            return response;
+            cookieSetAndViewCount(boardId, response, thisCookie);
         }
+    }
+
+    private void cookieSetAndViewCount(Long boardId, HttpServletResponse response, Cookie cookie) {
+        cookie.setMaxAge(calcEndSec());
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        addViewCount(boardId);
     }
 
     private int calcEndSec() {
