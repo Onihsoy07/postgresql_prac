@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Access;
+import javax.validation.constraints.NotBlank;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,5 +15,6 @@ import javax.persistence.Access;
 @Setter
 public class ReplyDto {
 
+    @NotBlank(message = "공백은 작성이 안됩니다.")
     private String comment;
 }

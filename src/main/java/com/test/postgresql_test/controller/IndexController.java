@@ -3,6 +3,7 @@ package com.test.postgresql_test.controller;
 import com.test.postgresql_test.Service.ServiceImpl.BoardService;
 import com.test.postgresql_test.config.auth.PrincipalDetails;
 import com.test.postgresql_test.domain.Entity.*;
+import com.test.postgresql_test.domain.dto.WriteBoardDto;
 import com.test.postgresql_test.domain.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
@@ -148,6 +149,7 @@ public class IndexController {
     public String writeBoard(Model model,
                              @AuthenticationPrincipal PrincipalDetails principal) {
         CfrData cfrData = cfrDataRepository.findTopByUsersId_IdOrderByCreateDateDesc(principal.getUsers().getId());
+        model.addAttribute("writeBoardDto", new WriteBoardDto());
         model.addAttribute("cfrData", cfrData);
         return "board/writeBoard";
     }

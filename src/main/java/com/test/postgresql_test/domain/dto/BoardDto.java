@@ -6,10 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BoardDto {
+
+    @NotBlank(message = "제목을 입력하세요")
     private String title;
+    @NotBlank(message = "글을 작성하세요.")
     private String content;
 
     @Builder

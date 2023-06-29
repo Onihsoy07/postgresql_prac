@@ -20,7 +20,7 @@ $(function() {
             url : "/board",
             type : "POST",
             contentType: "application/json;charset=utf-8",
-            dataType:"json",
+//            dataType:"json",
             data : JSON.stringify(data)
         }).done(function (res) {
             console.log(res);
