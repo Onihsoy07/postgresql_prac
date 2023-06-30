@@ -88,7 +88,9 @@
             <div class="container-fluid" th:if="${boardView!=null}">
                 <button class="btn btn-secondary" onclick="location.href='/'">목록</button>
                 <th:block th:if="${principal} != anonymousUser and ${boardView.users.id} == ${principal?.users.id}">
-                    <a href="/board/${boardView.id}/updateForm" class="btn btn-warning">수정</a>
+                    <a href="/board/${boardView.id}/updateForm"
+                       th:href="|/board/${boardView.id}/updateForm|"
+                       class="btn btn-warning">수정</a>
                     <button id="btn-delete" class="btn btn-danger">삭제</button>
                 </th:block>
                 <br/><br/>

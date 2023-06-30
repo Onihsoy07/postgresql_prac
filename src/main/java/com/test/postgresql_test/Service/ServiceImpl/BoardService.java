@@ -2,6 +2,7 @@ package com.test.postgresql_test.Service.ServiceImpl;
 
 import com.test.postgresql_test.domain.Entity.Board;
 import com.test.postgresql_test.domain.Entity.Users;
+import com.test.postgresql_test.domain.dto.UpdateBoardDto;
 import com.test.postgresql_test.domain.dto.WriteBoardDto;
 import com.test.postgresql_test.domain.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -114,6 +115,14 @@ public class BoardService {
         long remainingTime = todayEndSecond - currentSecond;
 
         return Long.valueOf(remainingTime).intValue();
+    }
+
+    @Transactional
+    public void updateBoard(UpdateBoardDto updateBoardDto) {
+        Board board = findById(updateBoardDto.getId());
+
+        board.setTitle(updateBoardDto.getTitle());
+        board.setContent(updateBoardDto.getContent());
     }
 
 }
