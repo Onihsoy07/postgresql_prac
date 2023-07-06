@@ -20,12 +20,12 @@ $(function() {
             url : "/board",
             type : "POST",
             contentType: "application/json;charset=utf-8",
-//            dataType:"json",
+            dataType:"json",
             data : JSON.stringify(data)
         }).done(function (res) {
             console.log(res);
             if(res.httpsCode != 200) {
-                alert("글쓰기가 실패되었습니다.");
+                alert(res.data);
             } else {
                 alert("글쓰기가 완료되었습니다.");
                 location.href="/";
@@ -33,6 +33,29 @@ $(function() {
         }).fail(function (error){
             console.log(error);
             alert("글쓰기가 실패되었습니다.");
+        });
+    });
+
+    $("#btn-delete").click(function() {
+        alert("삭제 진행");
+        let boardId = $("#id").text();
+
+        $.ajax({
+            url : "/board/"+boardId,
+            type : "DELETE",
+            contentType: "application/json;charset=utf-8",
+//            dataType:"json"
+        }).done(function (res) {
+            console.log(res);
+            if(res.httpsCode != 200) {
+                alert(res.data);
+            } else {
+                alert("글 삭제를 완료했습니다.");
+                location.href="/";
+            }
+        }).fail(function (error){
+            console.log(error);
+            alert("글 삭제를 실패했습니다.");
         });
     });
 

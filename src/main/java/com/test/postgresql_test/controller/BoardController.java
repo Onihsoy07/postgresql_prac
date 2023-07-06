@@ -26,7 +26,7 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @PostMapping("/board")
+//    @PostMapping("/board")
     public String writeBoard(@Validated @ModelAttribute final WriteBoardDto writeBoardDto,
                              BindingResult bindingResult,
                              @AuthenticationPrincipal PrincipalDetails principal) {

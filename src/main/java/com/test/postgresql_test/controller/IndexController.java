@@ -8,6 +8,7 @@ import com.test.postgresql_test.domain.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,12 +50,12 @@ public class IndexController {
                             @PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
                             HttpServletRequest request,
                             HttpServletResponse response) {
-        boardService.viewCount(id, request, response);
         model.addAttribute("state", "/?");
         model.addAttribute("replyList", replyRepository.findByBoard_IdOrderByCreateDateAsc(id));
         model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
         model.addAttribute("boardView", boardService.findById(id));
         model.addAttribute("boards", boardService.boardList(cusPageable(pageable)));
+        boardService.viewCount(id, request, response);
         return "index";
     }
 
@@ -126,8 +127,8 @@ public class IndexController {
     public String getCfrList(@PathVariable("id") final Long id,
                                                      @AuthenticationPrincipal PrincipalDetails principal,
                                                      Model model) throws Exception {
-        if (id != principal.getUsers().getId()) {
-            throw new Exception("권한없음");
+        if (principal == null || id != principal.getUsers().getId()) {
+            throw new AccessDeniedException("권한없음");
         }
 //        long start = System.currentTimeMillis();
 //        try {
@@ -148,6 +149,9 @@ public class IndexController {
     @GetMapping("/board")
     public String writeBoard(Model model,
                              @AuthenticationPrincipal PrincipalDetails principal) {
+        if (principal == null) {
+            return "redirect:/";
+        }
         CfrData cfrData = cfrDataRepository.findTopByUsersId_IdOrderByCreateDateDesc(principal.getUsers().getId());
         model.addAttribute("writeBoardDto", new WriteBoardDto());
         model.addAttribute("cfrData", cfrData);

@@ -49,6 +49,11 @@ public class BoardService {
         });
     }
 
+    @Transactional
+    public void boardDelete(Long id) {
+        boardRepository.deleteById(id);
+    }
+
     @Transactional(readOnly = true)
     public Page<Board> searchBoard(String target, String keyword, Pageable pageable) {
         System.out.println(target);

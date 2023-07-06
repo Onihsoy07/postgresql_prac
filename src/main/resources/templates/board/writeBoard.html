@@ -10,7 +10,8 @@
 
     <div style="height:700px;margin:15px;">
         <div class="container">
-            <form action="#" th:action th:object="${writeBoardDto}" method="post">
+<!--            <form action="#" th:action th:object="${writeBoardDto}" method="post">-->
+            <th:block th:object="${writeBoardDto}">
 
                 <input type="hidden" id="id" value="${principal.users.id}">
 
@@ -32,9 +33,10 @@
                     <div th:errors="*{content}">title 이상</div>
                 </div>
 
-                <button type="submit" id="btn-save1" class="btn btn-primary">글쓰기</button>
+                <button type="button" id="btn-save" class="btn btn-primary">글쓰기</button>
 
-            </form>
+            </th:block>
+<!--            </form>-->
         </div>
     </div>
 
