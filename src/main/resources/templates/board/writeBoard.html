@@ -15,8 +15,9 @@
 
                 <input type="hidden" id="id" value="${principal.users.id}">
 
-                <div class="container">
-                    <span>${cfrData.value}&nbsp;&nbsp;${cfrData.confidence}</span>
+                <div class="container" th:if="${cfrData} != null">
+                    <span th:text="${cfrData.value}"></span>
+                    <span th:text="${cfrData.confidence}"></span>
                 </div>
 
                 <div class="form-group">

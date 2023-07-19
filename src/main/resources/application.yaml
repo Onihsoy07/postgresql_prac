@@ -1,10 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3307/cfr
-    #AWS  ENC(45VIbitzGi6uRZqtppxHdtp54pm0mMo8WbDd30T0WNRzbymTesLe9Zu4kzVHL8IJ)
-    #ENC(5nwYfH1QeMNqNkT9tmtu/6Gbmi3L3VgekUUcb81t/DK4TOAp8idDng==)
-    #ENC(DZS8i8xbaTeVJ9CrB/Il0K2CbQxdRswHfl+8whMAFqYmmkYY5KKGikCAtr19rwiyibyc4pA0IQzru6GU6XRokA==)
-    #jdbc:mysql://127.0.0.1:3307/cfr
+    url: jdbc:mysql://localhost:3306/cfr
     username: ENC(pVFh/sHs7RgvCGOlcSl3Fg==)
     #root ENC(pVFh/sHs7RgvCGOlcSl3Fg==)
     #test ENC(mrcBUlx9hUxwVNVNS8ErZA==)

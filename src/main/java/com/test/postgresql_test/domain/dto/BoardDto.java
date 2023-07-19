@@ -23,7 +23,7 @@ public class BoardDto {
         this.content = content;
     }
 
-    static BoardDto convertToDto(Board board) {
+    public static BoardDto convertToDto(Board board) {
         return new BoardDto().builder()
                 .title(board.getTitle())
                 .content(board.getContent())

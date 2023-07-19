@@ -1,6 +1,7 @@
 package com.test.postgresql_test.config;
 
 import com.test.postgresql_test.config.auth.PrincipalDetailsService;
+import com.test.postgresql_test.filter.SecurityTestFilter;
 import com.test.postgresql_test.handler.CustomAuthFailureHandler;
 import com.test.postgresql_test.handler.CustomAuthSuccessHandler;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.intercept.AuthorizationFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,6 +51,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .failureHandler(new CustomAuthFailureHandler())
                 .and()
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/");
+
+        http.addFilterBefore(new SecurityTestFilter(), UsernamePasswordAuthenticationFilter.class);
+
     }
 
     @Override
