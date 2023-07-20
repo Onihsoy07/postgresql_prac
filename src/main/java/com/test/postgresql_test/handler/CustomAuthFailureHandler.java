@@ -21,8 +21,7 @@ public class CustomAuthFailureHandler extends SimpleUrlAuthenticationFailureHand
                                         HttpServletResponse response,
                                         AuthenticationException exception) throws IOException, ServletException {
         String prePage = String.valueOf(request.getSession().getAttribute("prePage"));
-        String referer = prePage.substring(request.getHeader("Host").length());
-        setDefaultFailureUrl("/auth/login?referer=" + referer);
+    //    request.getSession().setAttribute("prePage", prePage);
         super.onAuthenticationFailure(request, response, exception);
     }
 }

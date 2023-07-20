@@ -94,12 +94,14 @@ public class IndexController {
     public String login(HttpServletRequest request) {
         String referer = request.getHeader("Referer");
         String host = request.getHeader("Host");
+        Object prePage = request.getSession().getAttribute("prePage");
 
         if (referer == null || referer.contains("/auth") || !referer.contains(host)) {
             referer = "/";
         }
-
-        request.getSession().setAttribute("prePage", referer);
+        if (prePage == null) {
+            request.getSession().setAttribute("prePage", referer);
+        }
 
         return "user/login";
     }

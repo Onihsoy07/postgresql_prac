@@ -15,11 +15,8 @@ public class SecurityTestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        log.info("check username={}, password={}", username, password);
-
-//        response.sendRedirect("/");
+//        log.info("check username={}, password={}", username, password);
 
         filterChain.doFilter(request, response);
-
     }
 }
