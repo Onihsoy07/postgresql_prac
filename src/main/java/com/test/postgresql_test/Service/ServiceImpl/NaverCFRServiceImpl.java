@@ -85,7 +85,7 @@ public class NaverCFRServiceImpl implements NaverCFRService {
     @Override
     @Transactional
     public void save(CfrResponseDto cfrResponseDto, Users users) {
-        CfrData cfrData = new CfrData().builder()
+        CfrData cfrData = CfrData.builder()
                 .value(cfrResponseDto.getFaces().get(0).getCelebrity().getValue())
                 .confidence(cfrResponseDto.getFaces().get(0).getCelebrity().getConfidence())
                 .users(users)
@@ -93,7 +93,7 @@ public class NaverCFRServiceImpl implements NaverCFRService {
         cfrDataRepository.save(cfrData);
     }
 
-    private String convertBinary(MultipartFile files) throws Exception{
+    private String convertBinary(MultipartFile files) throws Exception {
         String fileName = StringUtils.cleanPath(files.getOriginalFilename()) ;
         BufferedImage image = ImageIO.read(files.getInputStream());
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
