@@ -5,6 +5,10 @@
     <title>My Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
 <!--    java.lang.NumberFormatException: For input string: "favicon.ico" 해결 -->
     <link rel="icon" href="data:,">
     <link
@@ -23,6 +27,8 @@
 
 </head>
 <body th:with="principal=${#authentication.principal}">
+
+<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
 <th:block th:replace="~{layout/nav :: nav}"/>
 

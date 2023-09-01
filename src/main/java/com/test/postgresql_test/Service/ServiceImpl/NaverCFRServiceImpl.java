@@ -8,6 +8,7 @@ import com.test.postgresql_test.domain.Entity.Users;
 import com.test.postgresql_test.domain.dto.CfrResponseDto;
 import com.test.postgresql_test.domain.repository.CfrDataRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -23,6 +24,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class NaverCFRServiceImpl implements NaverCFRService {
@@ -85,12 +87,17 @@ public class NaverCFRServiceImpl implements NaverCFRService {
     @Override
     @Transactional
     public void save(CfrResponseDto cfrResponseDto, Users users) {
-        CfrData cfrData = CfrData.builder()
-                .value(cfrResponseDto.getFaces().get(0).getCelebrity().getValue())
-                .confidence(cfrResponseDto.getFaces().get(0).getCelebrity().getConfidence())
-                .users(users)
-                .build();
-        cfrDataRepository.save(cfrData);
+        if(cfrResponseDto.getFaces().size() == 1) {
+            CfrData cfrData = CfrData.builder()
+                    .value(cfrResponseDto.getFaces().get(0).getCelebrity().getValue())
+                    .confidence(cfrResponseDto.getFaces().get(0).getCelebrity().getConfidence())
+                    .users(users)
+                    .build();
+
+            cfrDataRepository.save(cfrData);
+        } else {
+            log.info("사람수 이상");
+        }
     }
 
     private String convertBinary(MultipartFile files) throws Exception {

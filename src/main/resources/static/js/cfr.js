@@ -8,13 +8,12 @@ $(function() {
         var imageInput = $("#imageInput")[0];
         console.log(imageInput.files[0]);
         var preImage = $("#preview");
-        console.log(preImage);
         console.log(resizingFile);
 
-        alert("afjfqf");
+        alert('aaaa');
 
         var formData = new FormData();
-        formData.append("image", imageInput.files[0]);
+        formData.append("image", resizingFile);
 
         if(imageInput.files.length === 0){
             alert("파일을 선택해주세요");
@@ -35,6 +34,7 @@ $(function() {
             alert("실패");
         });
     });
+
 
 });
 
@@ -74,6 +74,8 @@ $(function() {
 
 
 //이미지 압축
+var resizingFile;
+
 async function handleImageUpload(event) {
 
   const imageFile = event.target.files[0];
@@ -82,16 +84,19 @@ async function handleImageUpload(event) {
   console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
   const options = {
-    maxSizeMB: 1.9,
+    maxSizeMB: 0.1,
     maxWidthOrHeight: 1920,
-    useWebWorker: true
+    useWebWorker: true,
+    onProgress: async function(c) {
+        await console.log(c);
+    }
   }
   try {
     const compressedFile = await imageCompression(imageFile, options);
     console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
     console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
 
-    const resizingFile = new File([compressedFile], imageFile.name, { type: imageFile.type });
+    resizingFile = new File([compressedFile], imageFile.name, { type: imageFile.type });
     console.log(resizingFile);
 //    await uploadToServer(compressedFile); // write your own logic
     readURL(resizingFile);
@@ -118,3 +123,23 @@ function readURL(file) {
 }
 
 //document.getElementById("btn-cfrRequest").addEventListener('click',cfrRequest);
+
+const item = document.querySelector(".drop_item");
+//item.addEventListener("dragover", (e) => {
+//  console.log(e);
+//  console.log("드래그를 시작하면 발생하는 이벤트");
+//});
+
+item.addEventListener('dragover', (event) => {
+    console.log("dragover");
+  event.preventDefault();
+});
+
+item.addEventListener('dragleave', (event) => {
+    console.log("dragleave");
+  event.preventDefault();
+});
+
+item.addEventListener('drop', () => {
+  console.log('drop 이벤트');
+});

@@ -213,6 +213,14 @@ a:active  { text-decoration:none;color:gray; }
 
 }
 
+.drop_item {
+    width: 400px;
+    height: 400px;
+    background-color: gray;
+}
+
+
+
 @media (max-width: 450px) {
     .list_wrap {
         margin: 15px 0px;
