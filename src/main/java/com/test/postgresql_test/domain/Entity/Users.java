@@ -22,7 +22,7 @@ public class Users extends Base {
     @Column(nullable = false, unique = true)
     private Long id;
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false, unique = false)
