@@ -26,18 +26,10 @@ public class BoardController {
 
     private final BoardService boardService;
 
-//    @PostMapping("/board")
-    public String writeBoard(@Validated @ModelAttribute final WriteBoardDto writeBoardDto,
-                             BindingResult bindingResult,
+    @GetMapping("/board/form")
+    public String writeBoard(@ModelAttribute final WriteBoardDto writeBoardDto,
                              @AuthenticationPrincipal PrincipalDetails principal) {
-
-        if (bindingResult.hasErrors()) {
-            log.info("errors={}", bindingResult);
-            return "board/writeBoard";
-        }
-
-        boardService.boardSave(writeBoardDto, principal.getUsers());
-        return "redirect:/";
+        return "board/writeForm";
     }
 
     @GetMapping("/board/{boardId}/updateForm")

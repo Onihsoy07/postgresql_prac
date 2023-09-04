@@ -59,6 +59,17 @@ $(function() {
         });
     });
 
+    $("#select-board").on('change', function(){
+        let val = $("#select-board option:selected").attr('value');
+
+        if(!val){
+            alert("선택된 항목이 없습니다.");
+            return false;
+        }
+        window.open(val);
+    });
+
+
 });
 
 function boardSearch() {
