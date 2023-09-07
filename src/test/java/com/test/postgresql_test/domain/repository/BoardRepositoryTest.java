@@ -3,9 +3,8 @@ package com.test.postgresql_test.domain.repository;
 import com.test.postgresql_test.domain.Entity.Board;
 import com.test.postgresql_test.domain.Entity.Role;
 import com.test.postgresql_test.domain.Entity.Users;
-import com.test.postgresql_test.domain.dto.BoardDto;
+import com.test.postgresql_test.domain.dto.BoardFormDto;
 import com.test.postgresql_test.domain.dto.BoardFullDto;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class BoardRepositoryTest {
@@ -36,12 +34,12 @@ class BoardRepositoryTest {
         Board savedBoard = boardRepository.save(board);
 
         //when
-        BoardDto boardDto = boardRepository.findByIdToDto(savedBoard.getId());
-        System.out.println("boardDto = " + boardDto);
+        BoardFormDto boardFormDto = boardRepository.findByIdToDto(savedBoard.getId());
+        System.out.println("boardDto = " + boardFormDto);
 
         //then
-        assertThat(boardDto.getTitle()).isEqualTo(board.getTitle());
-        assertThat(boardDto.getContent()).isEqualTo(board.getContent());
+        assertThat(boardFormDto.getTitle()).isEqualTo(board.getTitle());
+        assertThat(boardFormDto.getContent()).isEqualTo(board.getContent());
 
     }
 

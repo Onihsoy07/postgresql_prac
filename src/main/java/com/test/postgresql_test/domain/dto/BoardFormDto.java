@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class BoardDto {
+public class BoardFormDto {
 
     @NotBlank(message = "제목을 입력하세요")
     private String title;
@@ -18,13 +18,13 @@ public class BoardDto {
     private String content;
 
     @Builder
-    public BoardDto(String title, String content) {
+    public BoardFormDto(String title, String content) {
         this.title = title;
         this.content = content;
     }
 
-    public static BoardDto convertToDto(Board board) {
-        return new BoardDto().builder()
+    public static BoardFormDto convertToDto(Board board) {
+        return new BoardFormDto().builder()
                 .title(board.getTitle())
                 .content(board.getContent())
                 .build();

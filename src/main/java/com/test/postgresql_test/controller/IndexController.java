@@ -3,8 +3,6 @@ package com.test.postgresql_test.controller;
 import com.test.postgresql_test.Service.ServiceImpl.BoardService;
 import com.test.postgresql_test.config.auth.PrincipalDetails;
 import com.test.postgresql_test.domain.Entity.*;
-import com.test.postgresql_test.domain.dto.BoardDto;
-import com.test.postgresql_test.domain.dto.BoardFullDto;
 import com.test.postgresql_test.domain.dto.WriteBoardDto;
 import com.test.postgresql_test.domain.repository.*;
 import lombok.RequiredArgsConstructor;

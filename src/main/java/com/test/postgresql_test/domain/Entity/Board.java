@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -28,11 +29,14 @@ public class Board extends Base {
 
     private int viewCount;
 
+    @Formula("(select count(*) from reply t where t.board_id = id)")
+    private int replyCount;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
+//    @JsonBackReference
     private Users users;
 
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference
+//    @JsonManagedReference
     private Set<Reply> replyList;
 }
