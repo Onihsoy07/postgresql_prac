@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -32,4 +33,10 @@ public class Reply extends Base {
     @JsonBackReference
     private Users users;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Reply reply;
+
+    @OneToMany(mappedBy = "reply", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Reply> replyList;
 }

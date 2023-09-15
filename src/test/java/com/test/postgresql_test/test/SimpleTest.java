@@ -1,8 +1,10 @@
 package com.test.postgresql_test.test;
 
 import com.test.postgresql_test.domain.Entity.Board;
+import com.test.postgresql_test.domain.Entity.Reply;
 import com.test.postgresql_test.domain.dto.BoardDto;
 import com.test.postgresql_test.domain.repository.BoardRepository;
+import com.test.postgresql_test.domain.repository.ReplyRepository;
 import groovy.util.logging.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @SpringBootTest
@@ -18,6 +19,9 @@ public class SimpleTest {
 
     @Autowired
     BoardRepository boardRepository;
+    @Autowired
+    ReplyRepository replyRepository;
+
 
     @Test
     void findByWriteTest() {
@@ -28,5 +32,13 @@ public class SimpleTest {
 
         System.out.println("board = " + board);
     }
+
+    @Test
+    void findByBoard_id_Reply() {
+        List<Reply> byBoardId = replyRepository.findByBoard_Id(15L);
+        System.out.println("byBoardId = " + byBoardId);
+    }
+
+
 
 }

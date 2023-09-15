@@ -20,14 +20,9 @@ public class ReplyService {
 
     @Transactional
     public void replySave(Long boardId, Long usersId, ReplyFormDto replyFormDto) {
-        Users users = usersService.findById(usersId);
-        Board board = boardService.findById(boardId);
-        Reply reply = new Reply().builder()
-                .level(0)
-                .comment(replyFormDto.getComment())
-                .users(users)
-                .board(board)
-                .build();
-        replyRepository.save(reply);
+        if (replyFormDto.getReplyId() == 0) {
+            replyFormDto.setReplyId(null);
+        }
+        replyRepository.replySave(boardId, usersId, replyFormDto.getReplyId(), replyFormDto.getComment(), replyFormDto.getDepth());
     }
 }

@@ -79,6 +79,42 @@ function boardSearch() {
     location.href = `/search?target=${target}&keyword=${sd}`;
 }
 
+function rereplyOpen(boardId, replyId, depth) {
+    $("div").remove("#reReplyBox");
+    $("div").remove("#areplyBox");
+
+    let html = "";
+
+    html += "<div id='reReplyBox'>";
+    html += "<div class='card-body'>";
+    html += "<div class='row'>";
+    html += "<div class='form-group col-sm-8'>";
+    html += "<input class='form-control input-sm' id='comment' type='text' placeholder='댓글 입력...'>";
+    html += "</div>";
+    html += "<div class='form-group col-sm-2'>";
+    html += "<button type='button' class='btn btn-primary' onclick='writeReply(" + boardId + ", " + replyId + ", " + depth + ")'>저장</button>";
+    html += "</div>";
+    html += "</div>";
+    html += "</div>";
+
+    $("#replybox" + replyId).after(html);
+
+}
+
+//    <div id="replyBox">
+//        <div class="card-body" th:if="${principal}!=anonymousUser">
+//            <div class="row">
+//                <div class="form-group col-sm-8">
+//                    <input class="form-control input-sm" id="comment" type="text" placeholder="댓글 입력...">
+//                </div>
+//                <div class='form-group col-sm-2'>
+//                    <button type='button' class='btn btn-primary' id='btn-replySave111' onclick='writeReply()'>
+//                        저장
+//                    </button>
+//                </div>
+//            </div>
+//        </div>
+
 
 
 //function cfrBoard(let id) {

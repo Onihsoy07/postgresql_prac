@@ -15,4 +15,8 @@ public class ReplyFormDto {
 
     @NotBlank(message = "공백은 작성이 안됩니다.")
     private String comment;
+
+    private Long replyId;
+    private int depth;
+
 }

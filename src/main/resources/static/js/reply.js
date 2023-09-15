@@ -1,8 +1,6 @@
 $(function() {
-    $("#btn-replySave").click(function() {
+    $("#aabtn-replySave").click(function() {
         let id = $("#id").text();
-
-        console.log(id);
 
         let data = {
             comment : $("#comment").val()
@@ -46,18 +44,19 @@ function newHello(id) {
 
 }
 
-function writeReply() {
+function writeReply(boardId, replyId, depth) {
 //    $("#btn-replySave").click(function() {
-        let id = $("#id").text();
-
-        console.log(id);
-
         let data = {
-            comment : $("#comment").val()
+            comment : $("#comment").val(),
+            replyId : replyId,
+            depth : depth
         }
 
+        alert(data);
+        console.log(data);
+
         $.ajax({
-            url : "/board/" + id + "/reply",
+            url : "/board/" + boardId + "/reply",
             type : "POST",
             contentType: "application/json;charset=utf-8",
             dataType:"json",

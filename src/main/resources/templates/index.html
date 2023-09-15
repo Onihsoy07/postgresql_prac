@@ -112,13 +112,13 @@
                 <hr>
                 <div id="replyWin">
                     <div id="replyBox">
-                        <div class="card-body" th:if="${principal}!=anonymousUser">
+                        <div class="card-body" id="areplyBox" th:if="${principal}!=anonymousUser">
                             <div class="row">
                                 <div class="form-group col-sm-8">
                                     <input class="form-control input-sm" id="comment" type="text" placeholder="댓글 입력...">
                                 </div>
                                 <div class="form-group col-sm-2">
-                                    <button type="button" class="btn btn-primary" id="btn-replySave111" onclick="writeReply()">
+                                    <button type="button" class="btn btn-primary" id="btn-replySave111" th:onclick="writeReply([[${boardView.id}]], 0, 0)">
                                         저장
                                     </button>
                                 </div>
@@ -128,7 +128,7 @@
                             <div th:id="|replybox${reply.id}|" th:style="|display:flex;margin-top:10px;margin-left:${reply.id*10}px|" th:name="|comment_${reply.id}|" th:each="reply : ${replyList}">
                                 <span th:id="comment" style="width:130px;" th:text="${reply.comment}">댓글 &nbsp;</span>
                                 <div th:id="|replyBtnBox${reply.id}|">
-                                    <button th:id="|replyBtn${reply.id}|" type="button" th:onclick="|newHello(${reply.id})|" th:class="|replyButton${reply.id}|">버튼</button>
+                                    <button th:id="|replyBtn${reply.id}|" type="button" th:onclick="rereplyOpen([[${boardView.id}]], [[${reply.id}]], [[${reply.level+1}]])" th:class="|replyButton${reply.id}|">버튼</button>
                                 </div>
                             </div>
                         </div>

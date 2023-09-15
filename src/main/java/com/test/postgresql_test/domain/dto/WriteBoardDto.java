@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public class WriteBoardDto {
 
+    private Long userId;
 
     @NotBlank(message = "제목을 입력하세요")
     private String title;

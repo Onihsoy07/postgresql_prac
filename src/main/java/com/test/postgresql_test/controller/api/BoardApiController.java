@@ -31,6 +31,10 @@ public class BoardApiController {
     public ResponseDto<String> writeBoard(@Validated @RequestBody final WriteBoardDto writeBoardDto,
                                           BindingResult bindingResult,
                                           @AuthenticationPrincipal PrincipalDetails principal) throws JsonProcessingException {
+        if (principal == null || !principal.getUsers().getId().equals(writeBoardDto.getUserId())) {
+            return new ResponseDto(HttpStatus.UNAUTHORIZED.value(), "실패");
+        }
+        
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
             List<String> errors = new ArrayList<>();
