@@ -45,14 +45,16 @@ function newHello(id) {
 }
 
 function writeReply(boardId, replyId, depth) {
-//    $("#btn-replySave").click(function() {
         let data = {
             comment : $("#comment").val(),
             replyId : replyId,
             depth : depth
         }
 
-        alert(data);
+        if(data.comment.length <= 0) {
+            data.comment = $("#reComment").val();
+        }
+
         console.log(data);
 
         $.ajax({
@@ -73,5 +75,4 @@ function writeReply(boardId, replyId, depth) {
             console.log(error);
             alert("댓글 쓰기가 실패되었습니다.");
         });
-//    });
 }

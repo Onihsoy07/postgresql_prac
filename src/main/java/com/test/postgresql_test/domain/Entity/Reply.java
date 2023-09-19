@@ -13,6 +13,7 @@ import java.util.List;
 @Setter
 @Getter
 @Builder
+@ToString
 @Table(schema = "postgresql_test")
 public class Reply extends Base {
 
@@ -37,6 +38,6 @@ public class Reply extends Base {
     @JsonBackReference
     private Reply reply;
 
-    @OneToMany(mappedBy = "reply", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "reply", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Reply> replyList;
 }

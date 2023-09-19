@@ -125,7 +125,7 @@
                             </div>
                         </div>
                         <div id="replyView">
-                            <div th:id="|replybox${reply.id}|" th:style="|display:flex;margin-top:10px;margin-left:${reply.id*10}px|" th:name="|comment_${reply.id}|" th:each="reply : ${replyList}">
+                            <div th:id="|replybox${reply.id}|" th:style="|display:flex;margin-top:10px;margin-left:${reply.level*20}px|" th:name="|comment_${reply.id}|" th:each="reply : ${replyList}">
                                 <span th:id="comment" style="width:130px;" th:text="${reply.comment}">댓글 &nbsp;</span>
                                 <div th:id="|replyBtnBox${reply.id}|">
                                     <button th:id="|replyBtn${reply.id}|" type="button" th:onclick="rereplyOpen([[${boardView.id}]], [[${reply.id}]], [[${reply.level+1}]])" th:class="|replyButton${reply.id}|">버튼</button>

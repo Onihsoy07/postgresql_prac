@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
 
 @Slf4j
 @SpringBootTest
@@ -35,8 +38,33 @@ public class SimpleTest {
 
     @Test
     void findByBoard_id_Reply() {
-        List<Reply> byBoardId = replyRepository.findByBoard_Id(15L);
-        System.out.println("byBoardId = " + byBoardId);
+        List<Reply> byBoardId = replyRepository.findByBoard_IdOrderByReply_IdDescIdAsc(17L);
+
+        Stack<Reply> stack = new Stack<>();
+        List<Reply> replyList = new ArrayList<>();
+
+        for (int i = byBoardId.size() - 1; i >= 0; i--) {
+            if (byBoardId.get(i).getReply() != null) {
+                break;
+            }
+            stack.push(byBoardId.get(i));
+            byBoardId.remove(i);
+        }
+
+        while (stack.size() > 0) {
+            Reply pop = stack.pop();
+            replyList.add(pop);
+
+            for (int i = byBoardId.size() - 1; i >= 0; i--) {
+                if (pop.getId() < byBoardId.get(i).getReply().getId()) {
+                    break;
+                }
+                if (pop.getId() == byBoardId.get(i).getReply().getId()) {
+                    stack.push(byBoardId.get(i));
+                    byBoardId.remove(i);
+                }
+            }
+        }
     }
 
 

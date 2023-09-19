@@ -89,7 +89,7 @@ function rereplyOpen(boardId, replyId, depth) {
     html += "<div class='card-body'>";
     html += "<div class='row'>";
     html += "<div class='form-group col-sm-8'>";
-    html += "<input class='form-control input-sm' id='comment' type='text' placeholder='댓글 입력...'>";
+    html += "<input class='form-control input-sm' id='reComment' type='text' placeholder='댓글 입력...'>";
     html += "</div>";
     html += "<div class='form-group col-sm-2'>";
     html += "<button type='button' class='btn btn-primary' onclick='writeReply(" + boardId + ", " + replyId + ", " + depth + ")'>저장</button>";

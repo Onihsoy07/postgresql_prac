@@ -20,4 +20,7 @@ public interface ReplyRepository extends JpaRepository<Reply, Long> {
                    @Param("comment") String comment, @Param("level") int level);
 
     List<Reply> findByBoard_Id(Long boardId);
+
+    @Query("select r from Reply r left join fetch r.users left join fetch r.reply where r.board.id = :boardId order by r.reply.id desc nulls last, r.id asc")
+    List<Reply> findByBoard_IdOrderByReply_IdDescIdAsc(@Param("boardId") Long boardId);
 }

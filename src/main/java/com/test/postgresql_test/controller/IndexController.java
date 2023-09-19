@@ -1,6 +1,7 @@
 package com.test.postgresql_test.controller;
 
 import com.test.postgresql_test.Service.ServiceImpl.BoardService;
+import com.test.postgresql_test.Service.ServiceImpl.ReplyService;
 import com.test.postgresql_test.config.auth.PrincipalDetails;
 import com.test.postgresql_test.domain.Entity.*;
 import com.test.postgresql_test.domain.dto.WriteBoardDto;
@@ -26,7 +27,7 @@ public class IndexController {
 
     private final CfrDataRepository cfrDataRepository;
 
-    private final ReplyRepository replyRepository;
+    private final ReplyService replyService;
 
     private final BoardService boardService;
 
@@ -51,7 +52,7 @@ public class IndexController {
                             HttpServletRequest request,
                             HttpServletResponse response) {
         model.addAttribute("state", "/?");
-        model.addAttribute("replyList", replyRepository.findByBoard_IdOrderByCreateDateAsc(id));
+        model.addAttribute("replyList", replyService.sortReply(id));
         model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
         model.addAttribute("boardView", boardService.findById(id));
         model.addAttribute("boards", boardService.boardList(cusPageable(pageable)));
@@ -69,7 +70,7 @@ public class IndexController {
                                   HttpServletResponse response) {
         boardService.viewCount(id, request, response);
         model.addAttribute("state", String.format("/search?target=%s&keyword=%s&", target, keyword));
-        model.addAttribute("replyList", replyRepository.findByBoard_IdOrderByCreateDateAsc(id));
+        model.addAttribute("replyList", replyService.sortReply(id));
         model.addAttribute("topRateCfr", cfrDataRepository.findTop10ByOrderByConfidenceDesc());
         model.addAttribute("boardView", boardService.findById(id));
         model.addAttribute("boards", boardService.searchBoard(target, keyword, cusPageable(pageable)));
