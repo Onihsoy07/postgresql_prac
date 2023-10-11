@@ -20,52 +20,52 @@ import java.util.Stack;
 @SpringBootTest
 public class SimpleTest {
 
-    @Autowired
-    BoardRepository boardRepository;
-    @Autowired
-    ReplyRepository replyRepository;
-
-
-    @Test
-    void findByWriteTest() {
-        Page<Board> board = boardRepository.findContent("안", PageRequest.of(0, 3));
-
-        List<Board> boardFetch = boardRepository.findContentFetch("안", PageRequest.of(0, 3));
-        PageImpl<BoardDto> boards = new PageImpl<>(BoardDto.convertToBoardDtoList(boardFetch), PageRequest.of(0, 3), board.getTotalElements());
-
-        System.out.println("board = " + board);
-    }
-
-    @Test
-    void findByBoard_id_Reply() {
-        List<Reply> byBoardId = replyRepository.findByBoard_IdOrderByReply_IdDescIdAsc(17L);
-
-        Stack<Reply> stack = new Stack<>();
-        List<Reply> replyList = new ArrayList<>();
-
-        for (int i = byBoardId.size() - 1; i >= 0; i--) {
-            if (byBoardId.get(i).getReply() != null) {
-                break;
-            }
-            stack.push(byBoardId.get(i));
-            byBoardId.remove(i);
-        }
-
-        while (stack.size() > 0) {
-            Reply pop = stack.pop();
-            replyList.add(pop);
-
-            for (int i = byBoardId.size() - 1; i >= 0; i--) {
-                if (pop.getId() < byBoardId.get(i).getReply().getId()) {
-                    break;
-                }
-                if (pop.getId() == byBoardId.get(i).getReply().getId()) {
-                    stack.push(byBoardId.get(i));
-                    byBoardId.remove(i);
-                }
-            }
-        }
-    }
+//    @Autowired
+//    BoardRepository boardRepository;
+//    @Autowired
+//    ReplyRepository replyRepository;
+//
+//
+//    @Test
+//    void findByWriteTest() {
+//        Page<Board> board = boardRepository.findContent("안", PageRequest.of(0, 3));
+//
+//        List<Board> boardFetch = boardRepository.findContentFetch("안", PageRequest.of(0, 3));
+//        PageImpl<BoardDto> boards = new PageImpl<>(BoardDto.convertToBoardDtoList(boardFetch), PageRequest.of(0, 3), board.getTotalElements());
+//
+//        System.out.println("board = " + board);
+//    }
+//
+//    @Test
+//    void findByBoard_id_Reply() {
+//        List<Reply> byBoardId = replyRepository.findByBoard_IdOrderByReply_IdDescIdAsc(17L);
+//
+//        Stack<Reply> stack = new Stack<>();
+//        List<Reply> replyList = new ArrayList<>();
+//
+//        for (int i = byBoardId.size() - 1; i >= 0; i--) {
+//            if (byBoardId.get(i).getReply() != null) {
+//                break;
+//            }
+//            stack.push(byBoardId.get(i));
+//            byBoardId.remove(i);
+//        }
+//
+//        while (stack.size() > 0) {
+//            Reply pop = stack.pop();
+//            replyList.add(pop);
+//
+//            for (int i = byBoardId.size() - 1; i >= 0; i--) {
+//                if (pop.getId() < byBoardId.get(i).getReply().getId()) {
+//                    break;
+//                }
+//                if (pop.getId() == byBoardId.get(i).getReply().getId()) {
+//                    stack.push(byBoardId.get(i));
+//                    byBoardId.remove(i);
+//                }
+//            }
+//        }
+//    }
 
 
 

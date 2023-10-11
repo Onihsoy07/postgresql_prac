@@ -1,10 +1,14 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/cfr
+    #jdbc:mysql://cfrboard.cfxnvsonnizs.ap-northeast-2.rds.amazonaws.com/cfr
+    #jdbc:mysql://localhost:3306/cfr
     username: ENC(pVFh/sHs7RgvCGOlcSl3Fg==)
     #root ENC(pVFh/sHs7RgvCGOlcSl3Fg==)
     #test ENC(mrcBUlx9hUxwVNVNS8ErZA==)
     password: ENC(ozJxEfavs5sEteOUmP6nGw==)
+    #ENC(KXS8n60cPBlbL6bqjsJUWV6Q4z4tojuv)
+    #ENC(ozJxEfavs5sEteOUmP6nGw==)
 
   jpa:
     open-in-view: true

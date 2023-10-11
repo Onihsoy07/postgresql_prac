@@ -15,7 +15,7 @@ public interface ReplyRepository extends JpaRepository<Reply, Long> {
     List<Reply> findByBoard_IdOrderByCreateDateAsc(Long id);
 
     @Modifying
-    @Query(value = "INSERT INTO REPLY(comment, level, board_id, users_id, reply_id) VALUES (:comment, :level, :boardId, :memberId, :replyId)", nativeQuery = true)
+    @Query(value = "INSERT INTO reply(comment, level, board_id, users_id, reply_id) VALUES (:comment, :level, :boardId, :memberId, :replyId)", nativeQuery = true)
     void replySave(@Param("boardId") Long boardId, @Param("memberId") Long memberId, @Param("replyId") Long replyId,
                    @Param("comment") String comment, @Param("level") int level);
 

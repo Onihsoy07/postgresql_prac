@@ -8,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class NaverCFRServiceImplTest {
 
-    @Test
-    void getCFR() {
-    }
-
-    @Test
-    void save() {
-    }
+//    @Test
+//    void getCFR() {
+//    }
+//
+//    @Test
+//    void save() {
+//    }
 }

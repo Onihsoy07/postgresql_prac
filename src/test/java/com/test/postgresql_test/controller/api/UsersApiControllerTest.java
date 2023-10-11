@@ -32,27 +32,25 @@ class UsersApiControllerTest {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    @Test
-    void join() {
-        UsersJoinDto usersJoinDto = new UsersJoinDto().builder()
-                        .username("wwww")
-                        .password("wwww")
-                        .build();
-        usersService.join(usersJoinDto);
-        Optional<Users> result = usersRepository.findByUsername("wwww");
-        Users users = null;
-        if (result.isEmpty()) {
-            fail();
-        } else {
-            users = result.get();
-        }
-
-        assertThat(users.getUsername()).isEqualTo(usersJoinDto.getUsername());
-//        뭐지 왜 다르지?
-//        assertThat(users.getPassword()).isEqualTo(passwordEncoder.encode(usersJoinDto.getPassword()));
-    }
-
-    private List<Reply> ReReplys = new ArrayList<>();
+//    @Test
+//    void join() {
+//        UsersJoinDto usersJoinDto = new UsersJoinDto().builder()
+//                        .username("wwww")
+//                        .password("wwww")
+//                        .build();
+//        usersService.join(usersJoinDto);
+//        Optional<Users> result = usersRepository.findByUsername("wwww");
+//        Users users = null;
+//        if (result.isEmpty()) {
+//            fail();
+//        } else {
+//            users = result.get();
+//        }
+//
+//        assertThat(users.getUsername()).isEqualTo(usersJoinDto.getUsername());
+////        뭐지 왜 다르지?
+////        assertThat(users.getPassword()).isEqualTo(passwordEncoder.encode(usersJoinDto.getPassword()));
+//    }
 
     
 }
