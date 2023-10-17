@@ -1,3 +1,6 @@
+const token = $("meta[name='_csrf']").attr("content")
+const header = $("meta[name='_csrf_header']").attr("content");
+
 $(function() {
     $("#aabtn-replySave").click(function() {
         let id = $("#id").text();
@@ -11,7 +14,10 @@ $(function() {
             type : "POST",
             contentType: "application/json;charset=utf-8",
             dataType:"json",
-            data : JSON.stringify(data)
+            data : JSON.stringify(data),
+            beforeSend : function(xhr) {
+                xhr.setRequestHeader(header, token);
+            }
         }).done(function (res) {
             console.log(res);
             if(res.httpsCode != 200) {
@@ -62,7 +68,10 @@ function writeReply(boardId, replyId, depth) {
             type : "POST",
             contentType: "application/json;charset=utf-8",
             dataType:"json",
-            data : JSON.stringify(data)
+            data : JSON.stringify(data),
+            beforeSend : function(xhr) {
+                xhr.setRequestHeader(header, token);
+            }
         }).done(function (res) {
             console.log(res);
             if(res.httpsCode != 200) {

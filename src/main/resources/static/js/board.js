@@ -10,6 +10,9 @@
 //});
 
 $(function() {
+    const token = $("meta[name='_csrf']").attr("content")
+    const header = $("meta[name='_csrf_header']").attr("content");
+
     $("#btn-save").click(function() {
         let data = {
             title : $("#title").val(),
@@ -21,7 +24,10 @@ $(function() {
             type : "POST",
             contentType: "application/json;charset=utf-8",
             dataType:"json",
-            data : JSON.stringify(data)
+            data : JSON.stringify(data),
+            beforeSend : function(xhr) {
+                xhr.setRequestHeader(header, token);
+            }
         }).done(function (res) {
             console.log(res);
             if(res.httpsCode != 200) {
@@ -45,6 +51,9 @@ $(function() {
             type : "DELETE",
             contentType: "application/json;charset=utf-8",
 //            dataType:"json"
+            beforeSend : function(xhr) {
+                xhr.setRequestHeader(header, token);
+            }
         }).done(function (res) {
             console.log(res);
             if(res.httpsCode != 200) {

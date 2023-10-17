@@ -9,6 +9,10 @@
 //    alert('join');
 //});
 
+const token = $("meta[name='_csrf']").attr("content")
+const header = $("meta[name='_csrf_header']").attr("content");
+
+
 $(function() {
     $("#btn-join").click(function() {
         let data = {
@@ -35,30 +39,45 @@ $(function() {
         });
     });
 
-    $("#btn-login").click(function() {
-        let data = {
-            id : $("#username").val(),
-            password : $("#password").val()
-        }
-
-        $.ajax({
-            url : "/auth/login",
-            type : "POST",
-            contentType: "application/json;charset=utf-8",
-            dataType:"json",
-            data : JSON.stringify(data)
-        }).done(function (res) {
-            console.log(res);
-            if(res.httpsCode != 200) {
-                alert("로그인이 실패되었습니다.");
-            } else {
-                alert("로그인이 완료되었습니다.");
-                location.href="/";
-            }
-        }).fail(function (error){
-            alert("로그인이 실패하였습니다.");
-        });
-    });
+//    $("#btn-login").click(function() {
+//        let data = {
+//            id : $("#username").val(),
+//            password : $("#password").val()
+//        }
+//
+//        $.ajax({
+//            url : "/auth/login",
+//            type : "POST",
+//            contentType: "application/json;charset=utf-8",
+//            dataType:"json",
+//            data : JSON.stringify(data)
+//        }).done(function (res) {
+//            console.log(res);
+//            if(res.httpsCode != 200) {
+//                alert("로그인이 실패되었습니다.");
+//            } else {
+//                alert("로그인이 완료되었습니다.");
+//                location.href="/";
+//            }
+//        }).fail(function (error){
+//            alert("로그인이 실패하였습니다.");
+//        });
+//    });
 
 
 });
+
+function logout() {
+        $.ajax({
+            url : "/logout",
+            type : "POST",
+            contentType: "application/json;charset=utf-8",
+            beforeSend : function(xhr) {
+                xhr.setRequestHeader(header, token);
+            }
+        }).done(function (res) {
+            location.href="/";
+        }).fail(function (error){
+//            alert("회원가입이 실패하였습니다.");
+        });
+}

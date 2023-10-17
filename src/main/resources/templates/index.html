@@ -21,6 +21,9 @@
             src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <link rel="stylesheet" href="/css/main.css" />
 
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
 </head>
 <body th:with="principal=${#authentication.principal}">
 
@@ -258,6 +261,7 @@
 
 
 
+    <script src="/js/user.js"></script>
     <script src="/js/reply.js"></script>
     <script src="/js/board.js"></script>
 
