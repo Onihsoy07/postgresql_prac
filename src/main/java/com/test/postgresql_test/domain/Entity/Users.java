@@ -2,11 +2,13 @@ package com.test.postgresql_test.domain.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.jsonwebtoken.Claims;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @NoArgsConstructor
@@ -45,4 +47,26 @@ public class Users extends Base {
 //    @OneToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //    private List<Reply> replyList;
 
+//    private Set<? extends GrantedAuthority> authorities;
+
+
+//    public Users(String username, String password, Set<? extends GrantedAuthority> authorities) {
+//        this.username = username;
+//        this.password = password;
+//        this.authorities = authorities;
+//    }
+
+//    public User(String username, String password, boolean enabled, boolean accountNonExpired,
+//                boolean credentialsNonExpired, boolean accountNonLocked,
+//                Collection<? extends GrantedAuthority> authorities) {
+//        Assert.isTrue(username != null && !"".equals(username) && password != null,
+//                "Cannot pass null or empty values to constructor");
+//        this.username = username;
+//        this.password = password;
+//        this.enabled = enabled;
+//        this.accountNonExpired = accountNonExpired;
+//        this.credentialsNonExpired = credentialsNonExpired;
+//        this.accountNonLocked = accountNonLocked;
+//        this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));
+//    }
 }
