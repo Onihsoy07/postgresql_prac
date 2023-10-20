@@ -4,6 +4,7 @@ import com.test.postgresql_test.domain.dto.ResponseDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.web.firewall.RequestRejectedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
-@RestControllerAdvice
+import javax.servlet.http.HttpServletRequest;
+
+//@ControllerAdvice
+//@RestControllerAdvice
 //@Controller
 public class GlobalExceptionHandler {
 
@@ -34,5 +37,14 @@ public class GlobalExceptionHandler {
 //        model.addAttribute("responseDto", responseDto);
 //        return "exception/globalException";
 //    }
+
+
+//    @ExceptionHandler(RequestRejectedException.class)
+//    public ResponseDto<String> globalExceptionHandler(RequestRejectedException e, HttpServletRequest request) {
+//        LOGGER.error("Referer url = {}", request.getHeader("Referer"));
+//        LOGGER.error(e.getMessage());
+//        return new ResponseDto<>(HttpStatus.BAD_REQUEST.value(), e.getMessage());
+//    }
+
 
 }

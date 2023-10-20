@@ -6,6 +6,8 @@ import com.test.postgresql_test.domain.dto.UpdateBoardDto;
 import com.test.postgresql_test.domain.dto.WriteBoardDto;
 import com.test.postgresql_test.domain.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Safelist;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -27,10 +29,19 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
+    private Safelist cusBoardXSS() {
+        return Safelist.relaxed()
+                .addProtocols("img", "src", "data")
+                .addTags("font", "tr", "td")
+                .addAttributes("font", "style", "color")
+                .addAttributes("table", "class");
+    }
+
     @Transactional
     public void boardSave(WriteBoardDto writeBoardDto, Users users) {
         Board board = new Board().builder()
                 .title(writeBoardDto.getTitle())
+//                .content(Jsoup.clean(writeBoardDto.getContent(), cusBoardXSS()))
                 .content(writeBoardDto.getContent())
                 .users(users)
                 .build();
@@ -127,7 +138,7 @@ public class BoardService {
         Board board = findById(updateBoardDto.getId());
 
         board.setTitle(updateBoardDto.getTitle());
-        board.setContent(updateBoardDto.getContent());
+        board.setContent(Jsoup.clean(updateBoardDto.getContent(), Safelist.relaxed()));
     }
 
 }

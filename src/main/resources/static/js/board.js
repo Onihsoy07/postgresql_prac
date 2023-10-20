@@ -19,6 +19,9 @@ $(function() {
             content : $("#content").val()
         }
 
+        console.log(data);
+        alert("aa");
+
         $.ajax({
             url : "/board",
             type : "POST",
